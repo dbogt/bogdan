@@ -1,6 +1,5 @@
 import streamlit as st
 
-st.markdown("# Welcome 🎈")
 st.sidebar.markdown("# Main page 🎈")
 
 text = """
@@ -25,22 +24,6 @@ Some Python projects to try out:
 - :moneybag:[Ontario Sunshine List](https://bit.ly/ONSunshineList): Dashboard that explores 20+ years of public sector salary disclosures from Ontario (https://www.ontario.ca/page/public-sector-salary-disclosure). [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dbogt/on_sunshine/main) 
 - :movie_camera::trophy:[Oscars 2022 Predictions](https://bitly.com/oscarsApp): Make predictions for the top categories and compare your answers with other people around the world. Also try out the Best Picture Emoji quiz while you're at it! [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dbogt/oscars2022/main) 
 - :game_die:[Board Game Collection](https://bitly.com/BGGApp): Check out your board game collection by connecting with your BoardGameGeek account. [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/dbogt/bggcollection/main/app.py) 
-
-
-<!--
-**dbogt/dbogt** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
 """
 
 st.markdown(text)
