@@ -29,3 +29,4 @@ Some Python projects to try out:
 st.markdown(text)
 
 st.sidebar.image("https://avatars.githubusercontent.com/u/59750436?v=4")
+st.sidebar.write("Bogdan delivers a variety of courses at The Marquee Group that focus on financial modeling, data sciences, and programming."
