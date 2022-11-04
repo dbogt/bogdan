@@ -1,5 +1,5 @@
 import streamlit as st
-st.title("# VBA Resources")
+st.title("VBA Resources")
 st.sidebar.markdown("# VBA Resources")
 
 text = """
