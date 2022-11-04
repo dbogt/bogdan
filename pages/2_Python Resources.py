@@ -1,9 +1,9 @@
 import streamlit as st
-st.markdown("# VBA Resources ❄️")
-st.sidebar.markdown("# VBA Resources ❄️")
+
+st.sidebar.markdown("# Python Resources 🐍")
 
 text = """
-# Python Resources
+# Python Resources 🐍
 Below is also a list of a few resources I've used in the past for Python, along with demos I've created over the years.
 
 ## Online Demos
