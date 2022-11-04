@@ -27,3 +27,5 @@ Some Python projects to try out:
 """
 
 st.markdown(text)
+
+st.sidebar.image("https://avatars.githubusercontent.com/u/59750436?v=4")
