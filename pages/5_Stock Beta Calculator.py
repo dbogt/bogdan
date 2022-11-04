@@ -459,7 +459,3 @@ pdfLink = pdfLinks[course]
 
 # st.markdown(pdf_display, unsafe_allow_html=True)
 displ_pdf_link(pdfLink)
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
