@@ -195,8 +195,10 @@ with st.sidebar.form(key='inputs_form'):
     indexDrop = st.selectbox('Market Index:',indices)
     intervalDrop = st.selectbox('Interval:',intervalsMap.keys(),index=2)
     interval = intervalsMap[intervalDrop]
-    startDate = st.date_input('Start Date', pd.to_datetime('2016-11-01'))
-    endDate = st.date_input('End Date', datetime.now())
+    today = datetime.now()
+    
+    startDate = st.date_input('Start Date', today + pd.DateOffset(years=-5)) #5 years ago by default
+    endDate = st.date_input('End Date', today)
     addConst = st.checkbox('Add Constant', value=True)
     submit_btn = st.form_submit_button(label='submit')
 
