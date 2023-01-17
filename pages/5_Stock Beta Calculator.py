@@ -78,9 +78,12 @@ def get_crumbs_and_cookies(stock):
         website = requests.get(url, headers=header)
         # soup = BeautifulSoup(website.text, 'lxml')
         soup = BeautifulSoup(website.text)
-        crumb = re.findall('"CrumbStore":{"crumb":"(.+?)"}', str(soup))
+        #crumb = re.findall('"CrumbStore":{"crumb":"(.+?)"}', str(soup))
 
-        return (header, crumb[0], website.cookies)
+        #return (header, crumb[0], website.cookies)
+        
+        crumb = "thamba"
+        return (header, crumb, website.cookies)
     
 def convert_to_unix(date):
     """
