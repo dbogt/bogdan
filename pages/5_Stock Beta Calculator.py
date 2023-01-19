@@ -242,6 +242,7 @@ enel = yf.download("ENEL.MI",interval=interval,start=dayStart,end=dayEnd)
 st.write(enel)
 stockDF = grabPricingAll(stockDrop, interval, dayStart, dayEnd)
 indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
+st.write(stockDF)
 
 stockName = grabPricing(stockDrop, 'displayName')
 if stockName == 'N/A':
