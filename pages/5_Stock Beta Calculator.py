@@ -233,7 +233,7 @@ with st.sidebar.form(key='inputs_form'):
 # indexDF = grabDF(indexDrop + ".csv")
 #%% Grab Data
 indexTickersMap = {'S&P 500':"^GSPC",'Russell 2000':'^RUT','FTSE 100':'^FTSE',
-                   'Nikkei 225':'^N225','Gold':'GC=F','S&P/TSX':'^GSPTSE','S&P/ASX':'STW.AX','Italy 40':'^BIT40N'}
+                   'Nikkei 225':'^N225','Gold':'GC=F','S&P/TSX':'^GSPTSE','S&P/ASX':'STW.AX','Italy 40':'^BIT40P'}
 indexTicker = indexTickersMap[indexDrop]
 
 #dates formatted for the YFin API
