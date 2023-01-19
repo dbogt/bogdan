@@ -123,7 +123,9 @@ def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021
                 
         website = requests.get(url, headers=header, cookies=cookies)
 
-    data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
+    #data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
+    data = pd.read_csv(StringIO(website.text))
+    st.write(data)
     data['Returns'] = data['Close'].pct_change()
     return data
 
