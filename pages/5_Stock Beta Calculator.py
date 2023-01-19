@@ -237,12 +237,16 @@ indexTicker = indexTickersMap[indexDrop]
 dayStart = '{:%Y-%m-%d}'.format(startDate)
 dayEnd = '{:%Y-%m-%d}'.format(endDate)
 
-st.write(interval, dayStart,dayEnd)
+st.write(stockDrop, interval, dayStart,dayEnd)
 enel = yf.download("ENEL.MI",interval=interval,start=dayStart,end=dayEnd)
 st.write(enel)
-stockDF = grabPricingAll(stockDrop, interval, dayStart, dayEnd)
-indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
+# stockDF = grabPricingAll(stockDrop, interval, dayStart, dayEnd)
+stockDF = yf.download(stockDrop,interval=interval,start=dayStart,end=dayEnd)
+
+# indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
+indexDF = yf.download(indexTicker,interval=interval,start=dayStart,end=dayEnd)
 st.write(stockDF)
+st.write(indexDF)
 
 stockName = grabPricing(stockDrop, 'displayName')
 if stockName == 'N/A':
