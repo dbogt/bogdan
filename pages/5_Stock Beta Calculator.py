@@ -23,8 +23,8 @@ import json
 
 
 #%% Yahoo Finance Cookies
-cookies = st.secrets.cookies
-st.write(cookies)
+#cookies = st.secrets.cookies
+#st.write(cookies)
 
 st.set_page_config(layout="wide",page_title='Stock Beta App')
 #%% Import Files
@@ -119,6 +119,7 @@ def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021
     day_begin_unix = convert_to_unix(day_begin)
     day_end_unix = convert_to_unix(day_end)
     header, crumb, cookies = get_crumbs_and_cookies(stock)
+    cookies = st.secrets.cookies
     
     with requests.session():
         url = 'https://query1.finance.yahoo.com/v7/finance/download/' \
@@ -129,7 +130,7 @@ def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021
                 
         website = requests.get(url, headers=header, cookies=cookies)
 
-    # st.write(website.text)
+    st.write(website.text)
     data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
     data['Returns'] = data['Close'].pct_change()
     return data
