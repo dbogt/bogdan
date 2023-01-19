@@ -21,6 +21,11 @@ from io import StringIO, BytesIO
 from urllib.request import Request, urlopen  
 import json
 
+
+#%% Yahoo Finance Cookies
+cookies = st.secrets.cookies
+st.write(cookies)
+
 st.set_page_config(layout="wide",page_title='Stock Beta App')
 #%% Import Files
 @st.cache
@@ -124,7 +129,7 @@ def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021
                 
         website = requests.get(url, headers=header, cookies=cookies)
 
-    st.write(website.text)
+    # st.write(website.text)
     data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
     data['Returns'] = data['Close'].pct_change()
     return data
