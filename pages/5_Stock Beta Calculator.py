@@ -26,9 +26,6 @@ import yfinance as yf
 #cookies = st.secrets.cookies
 #st.write(cookies)
 
-data = yf.download("SPY AAPL", start="2017-01-01", end="2017-04-30")
-st.write(data)
-
 st.set_page_config(layout="wide",page_title='Stock Beta App')
 #%% Import Files
 @st.cache
@@ -174,7 +171,9 @@ def grabPricing(ticker, field):
 
 #@st.cache
 def grabPricingAll(ticker, interval, start, end):
-    df = fnYFinHist(ticker, interval, start, end)
+    #df = fnYFinHist(ticker, interval, start, end)
+    df = yf.download(ticker, interval=interval, start=start, end=end)
+    #st.write(data)
     updateDate()
     return df
 
@@ -234,8 +233,10 @@ indexTickersMap = {'S&P 500':"^GSPC",'Russell 2000':'^RUT','FTSE 100':'^FTSE',
 indexTicker = indexTickersMap[indexDrop]
 
 #dates formatted for the YFin API
-dayStart = '{:%d-%m-%Y}'.format(startDate)
-dayEnd = '{:%d-%m-%Y}'.format(endDate)
+#dayStart = '{:%d-%m-%Y}'.format(startDate)
+#dayEnd = '{:%d-%m-%Y}'.format(endDate)
+dayStart = '{:%Y-%m-%d}'.format(startDate)
+dayEnd = '{:%Y-%m-%d}'.format(endDate)
 
 stockDF = grabPricingAll(stockDrop, interval, dayStart, dayEnd)
 indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
