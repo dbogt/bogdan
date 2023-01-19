@@ -424,7 +424,7 @@ def createHtml(chart1, chart2, chart3):
     return allHtml
     
 
-@st.cache(allow_output_mutation=True)
+#@st.cache(allow_output_mutation=True)
 def createExcel():
     buffer = BytesIO()
     with pd.ExcelWriter(buffer) as writer:
