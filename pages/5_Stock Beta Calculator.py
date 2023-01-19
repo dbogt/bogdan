@@ -20,11 +20,14 @@ import re  #regular expressions
 from io import StringIO, BytesIO
 from urllib.request import Request, urlopen  
 import json
-
+import yfinance as yf
 
 #%% Yahoo Finance Cookies
 #cookies = st.secrets.cookies
 #st.write(cookies)
+
+data = yf.download("SPY AAPL", start="2017-01-01", end="2017-04-30")
+st.write(data)
 
 st.set_page_config(layout="wide",page_title='Stock Beta App')
 #%% Import Files
