@@ -170,9 +170,9 @@ def grabPricing(ticker, field):
     return fieldValue
 
 #@st.cache
-def grabPricingAll(ticker, interval, start, end):
+def grabPricingAll(ticker, interval="1d", period_start="2013-01-01", period_end="2023-01-19"):
     #df = fnYFinHist(ticker, interval, start, end)
-    df = yf.download(ticker, interval=interval, start=start, end=end)
+    df = yf.download(ticker, interval=interval, start=period_start, end=period_end)
     df['Returns'] = df['Close'].pct_change()
     df.reset_index(inplace=True)
     df['Date'] = df['Date'].dt.normalize()
@@ -247,8 +247,8 @@ indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
 indexDF.index = indexDF.index.date
 
 #indexDF = yf.download(indexTicker,interval=interval,start=dayStart,end=dayEnd)
-st.write(stockDF)
-st.write(indexDF)
+# st.write(stockDF)
+# st.write(indexDF)
 
 stockName = grabPricing(stockDrop, 'displayName')
 if stockName == 'N/A':
@@ -282,7 +282,7 @@ mergedData = indexDF.merge(stockDF, how='inner',
                          left_index=True, right_index=True,
                          suffixes=("_Index","_Stock"))
 
-st.write(mergedData)                           
+# st.write(mergedData)                           
 mergedData.dropna(inplace=True)
 mergedData['Date'] = mergedData.index
     #same as: mergedData = mergedData.dropna()
