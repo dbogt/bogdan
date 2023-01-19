@@ -6,7 +6,7 @@ numpy==1.19.4
 pillow==8.2.0
 xlrd==1.2.0
 statsmodels==0.13.1
-beautifulsoup4==4.9.1
+beautifulsoup4
 urllib3==1.26.6
 openpyxl
 streamlit==1.14.0
