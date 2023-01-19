@@ -274,7 +274,9 @@ else:
 #%% Merging Data Sets
 mergedData = indexDF.merge(stockDF, how='inner',
                          left_index=True, right_index=True,
-                         suffixes=("_Index","_Stock"))  
+                         suffixes=("_Index","_Stock"))
+
+st.write(mergedData)                           
 mergedData.dropna(inplace=True)
 mergedData['Date'] = mergedData.index
     #same as: mergedData = mergedData.dropna()
