@@ -185,7 +185,8 @@ def refreshPricing(ticker, timeStamp):
 
 @st.cache(allow_output_mutation=True)
 def refreshPricingAll(ticker, interval, start, end, timeStamp):  
-    df = fnYFinHist(ticker, interval, start, end)
+    #df = fnYFinHist(ticker, interval, start, end)
+    df = yf.download(ticker, interval=interval, start=start, end=end)
     return df
 
 #%% Streamlit Components
@@ -196,10 +197,6 @@ stocks = ['AAPL','BA','JNJ','KO','MCD','NKE',
           'TM','7203.T','SONY','6758.T','SFTBY','9984.T']
 indices = ['S&P 500','Russell 2000','FTSE 100','Nikkei 225','Gold','S&P/TSX','S&P/ASX']
 intervalsMap = {'Daily':'1d','Weekly':'1wk','Monthly':'1mo'}
-
-#DEBUG
-df = fnYFinHist("AAPL")
-st.write(df)
 
 st.sidebar.header("Model Assumptions")
 ownTicker = st.sidebar.checkbox("Enter your own ticker")
