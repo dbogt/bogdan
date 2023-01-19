@@ -122,11 +122,16 @@ def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021
     cookies = st.secrets.cookies
     
     with requests.session():
+        # url = 'https://query1.finance.yahoo.com/v7/finance/download/' \
+        #       '{stock}?period1={day_begin}&period2={day_end}&interval={interval}&events=history&crumb={crumb}' \
+        #       .format(stock=stock, 
+        #               day_begin=day_begin_unix, day_end=day_end_unix,
+        #               interval=interval, crumb=crumb)
         url = 'https://query1.finance.yahoo.com/v7/finance/download/' \
               '{stock}?period1={day_begin}&period2={day_end}&interval={interval}&events=history&crumb={crumb}' \
               .format(stock=stock, 
                       day_begin=day_begin_unix, day_end=day_end_unix,
-                      interval=interval, crumb=crumb)
+                      interval=interval)
                 
         website = requests.get(url, headers=header, cookies=cookies)
 
