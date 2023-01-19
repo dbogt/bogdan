@@ -425,13 +425,13 @@ def createHtml(chart1, chart2, chart3):
     
 
 #@st.cache(allow_output_mutation=True)
-def createExcel():
-    buffer = BytesIO()
-    with pd.ExcelWriter(buffer) as writer:
-        stockDF.to_excel(writer, sheet_name=stockDrop, index=True)
-        indexDF.to_excel(writer, sheet_name=indexDrop, index=True)
-        mergedData.to_excel(writer, sheet_name="Merged", index=True)
-    return buffer
+# def createExcel():
+#     buffer = BytesIO()
+#     with pd.ExcelWriter(buffer) as writer:
+#         stockDF.to_excel(writer, sheet_name=stockDrop, index=True)
+#         indexDF.to_excel(writer, sheet_name=indexDrop, index=True)
+#         mergedData.to_excel(writer, sheet_name="Merged", index=True)
+#     return buffer
 
 st.sidebar.header("Download Outputs")
 st.sidebar.download_button(
@@ -439,10 +439,10 @@ st.sidebar.download_button(
     data=createHtml(fig3,figStock,figIndex),
     file_name='regression.html')        
 
-st.sidebar.download_button(
-    label="Download data as Excel",
-    data=createExcel(),
-    file_name='stock_prices.xlsx')        
+# st.sidebar.download_button(
+#     label="Download data as Excel",
+#     data=createExcel(),
+#     file_name='stock_prices.xlsx')        
         
 #Download OLS Results
 olsFileType = st.sidebar.radio('OLS Export Format',['csv','html'])
