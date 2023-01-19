@@ -238,7 +238,7 @@ dayStart = '{:%Y-%m-%d}'.format(startDate)
 dayEnd = '{:%Y-%m-%d}'.format(endDate)
 
 st.write(interval, dayStart,dayEnd)
-enel = yf.download("ENEL.MI",interval='1d',start='2023-01-01',end='2023-01-19')
+enel = yf.download("ENEL.MI",interval=interval,start=start,end=end)
 st.write(enel)
 stockDF = grabPricingAll(stockDrop, interval, dayStart, dayEnd)
 indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
