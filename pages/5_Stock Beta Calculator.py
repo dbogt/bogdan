@@ -78,6 +78,7 @@ def get_crumbs_and_cookies(stock):
         website = requests.get(url, headers=header)
         # soup = BeautifulSoup(website.text, 'lxml')
         soup = BeautifulSoup(website.text)
+        
         #crumb = re.findall('"CrumbStore":{"crumb":"(.+?)"}', str(soup))
 
         #return (header, crumb[0], website.cookies)
@@ -123,6 +124,7 @@ def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021
                 
         website = requests.get(url, headers=header, cookies=cookies)
 
+    st.write(website.text)
     data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
     data['Returns'] = data['Close'].pct_change()
     return data
