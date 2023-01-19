@@ -123,9 +123,7 @@ def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021
                 
         website = requests.get(url, headers=header, cookies=cookies)
 
-    #data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
-    data = pd.read_csv(StringIO(website.text))
-    st.write(data)
+    data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
     data['Returns'] = data['Close'].pct_change()
     return data
 
@@ -183,6 +181,10 @@ stocks = ['AAPL','BA','JNJ','KO','MCD','NKE',
           'TM','7203.T','SONY','6758.T','SFTBY','9984.T']
 indices = ['S&P 500','Russell 2000','FTSE 100','Nikkei 225','Gold','S&P/TSX','S&P/ASX']
 intervalsMap = {'Daily':'1d','Weekly':'1wk','Monthly':'1mo'}
+
+#DEBUG
+df = fnYFinHist("AAPL")
+st.write(df)
 
 st.sidebar.header("Model Assumptions")
 ownTicker = st.sidebar.checkbox("Enter your own ticker")
