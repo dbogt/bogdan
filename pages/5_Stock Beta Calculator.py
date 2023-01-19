@@ -103,7 +103,7 @@ def convert_to_unix(date):
 
 
 # @st.cache
-def fnYFinHist(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021'):
+def fnYFinHist_old(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021'):
     """
     queries yahoo finance api to receive historical data in csv file format
     
@@ -173,6 +173,7 @@ def grabPricing(ticker, field):
 def grabPricingAll(ticker, interval, start, end):
     #df = fnYFinHist(ticker, interval, start, end)
     df = yf.download(ticker, interval=interval, start=start, end=end)
+    df['Returns'] = df['Close'].pct_change()
     #st.write(data)
     updateDate()
     return df
@@ -187,6 +188,7 @@ def refreshPricing(ticker, timeStamp):
 def refreshPricingAll(ticker, interval, start, end, timeStamp):  
     #df = fnYFinHist(ticker, interval, start, end)
     df = yf.download(ticker, interval=interval, start=start, end=end)
+    df['Returns'] = df['Close'].pct_change()
     return df
 
 #%% Streamlit Components
