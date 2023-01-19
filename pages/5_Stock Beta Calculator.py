@@ -245,13 +245,10 @@ st.write(stockDrop, interval, dayStart,dayEnd)
 #st.write(enel)
 stockDF = grabPricingAll(stockDrop, interval, dayStart, dayEnd)
 stockDF = yf.download(stockDrop,interval=interval,start=dayStart,end=dayEnd)
-stockDF.reset_index(inplace=True)
-
-stockDF['Date'] = stockDF['Date'].dt.normalize()
-
-stockDF.set_index('Date', inplace=True)
+stockDF.index.tz_localize(None)
 
 indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
+indexDF.index.tz_localize(None)
 #indexDF = yf.download(indexTicker,interval=interval,start=dayStart,end=dayEnd)
 st.write(stockDF)
 st.write(indexDF)
