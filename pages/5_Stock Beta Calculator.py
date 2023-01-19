@@ -276,6 +276,7 @@ mergedData['Date'] = mergedData.index
     #same as: mergedData = mergedData.dropna()
 #%% Regression Model
 mergedData['Constant'] = 1 #used to calculate alpha or y-intercept 
+st.write(mergedData)
 if addConst:
     capm = sm.OLS(mergedData['Returns_Stock'], mergedData[['Returns_Index','Constant']])
 else:    
