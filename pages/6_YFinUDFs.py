@@ -5,7 +5,7 @@ import requests
 
 
 cookies = st.secrets['cookies']
-st.write(cookies)
+#st.write(cookies)
 
 headers = {
     'authority': 'query2.finance.yahoo.com',
@@ -56,6 +56,7 @@ def fnYFinJSONAll(stock):
 
 ticker = st.text_input("Enter a ticker")
 urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
+st.write(urlData + "&crumb=" + params['crumb'])
 response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
 st.write(response.json())
 
