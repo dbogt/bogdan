@@ -52,4 +52,4 @@ def fnYFinJSONAll(stock):
         df.set_index('symbol', inplace=True)
     return df
   
-  df = fnYFinJSONAll('TSLA')
+df = fnYFinJSONAll('TSLA')
