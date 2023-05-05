@@ -54,10 +54,10 @@ def fnYFinJSONAll(stock):
     return df
 
 
-
+ticker = st.text_input("Enter a ticker")
+urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
 response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
 st.write(response.json())
 
-ticker = st.text_input("Enter a ticker")
 df = fnYFinJSONAll(ticker)
 st.write(df)
