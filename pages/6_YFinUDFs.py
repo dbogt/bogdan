@@ -1,6 +1,7 @@
 import streamlit as st
 import yfinUDFs as yf
 import pandas as pd
+import requests
 
 
 cookies = st.secrets['cookies']
@@ -51,7 +52,12 @@ def fnYFinJSONAll(stock):
         df = pd.DataFrame({'symbol':[stock],'shortName':['n.a.']})
         df.set_index('symbol', inplace=True)
     return df
- 
+
+
+
+response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
+st.write(response.json())
+
 ticker = st.text_input("Enter a ticker")
 df = fnYFinJSONAll(ticker)
 st.write(df)
