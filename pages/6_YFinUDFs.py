@@ -53,3 +53,4 @@ def fnYFinJSONAll(stock):
     return df
   
 df = fnYFinJSONAll('TSLA')
+st.write(df)
