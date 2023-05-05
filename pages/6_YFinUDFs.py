@@ -51,6 +51,7 @@ def fnYFinJSONAll(stock):
         df = pd.DataFrame({'symbol':[stock],'shortName':['n.a.']})
         df.set_index('symbol', inplace=True)
     return df
-  
-df = fnYFinJSONAll('TSLA')
+ 
+ticker = st.text_input("Enter a ticker")
+df = fnYFinJSONAll(ticker)
 st.write(df)
