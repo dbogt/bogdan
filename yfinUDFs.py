@@ -84,7 +84,7 @@ def fnYFinJSON(stock, field):
     if not stock:
         return "enter a ticker"
     else:
-    	urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+stock
+    	urlData = "https://query2.finance.yahoo.com/v6/finance/quote?symbols="+stock
     	webUrl = urlopen(urlData)
     	if (webUrl.getcode() == 200):
     		data = webUrl.read()
@@ -102,7 +102,7 @@ def fnYFinJSON(stock, field):
         return "N/A"
 
 def fnYFinJSONAll(stock):
-	urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+stock
+	urlData = "https://query2.finance.yahoo.com/v6/finance/quote?symbols="+stock
 	df = pd.read_json(urlData)
 	df = pd.DataFrame(df.iloc[1][0])#need to go down to result layer
 	df.set_index('symbol', inplace=True) #renaming row as the ticker to keep track of data
