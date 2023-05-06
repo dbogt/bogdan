@@ -31,7 +31,7 @@ params = {
 }
 
 def fnYFinJSONAll(stock): 
-    urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+stock
+    urlData = "https://query2.finance.yahoo.com/v6/finance/quote?symbols="+stock
     #st.write("Running", stock)
     try:
         response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
