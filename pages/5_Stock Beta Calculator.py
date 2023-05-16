@@ -29,6 +29,9 @@ import yfinance as yf
 st.set_page_config(layout="wide",page_title='Stock Beta App')
 
 st.write(pd.__version__)
+test = yf.download("AAPL", interval='1d', start="2013-01-01", end="2023-01-19")
+st.write(test)
+
 #%% Import Files
 @st.cache
 def grabDF(fileName):
