@@ -27,6 +27,8 @@ import yfinance as yf
 #st.write(cookies)
 
 st.set_page_config(layout="wide",page_title='Stock Beta App')
+
+st.write(pd.__version__)
 #%% Import Files
 @st.cache
 def grabDF(fileName):
