@@ -246,11 +246,9 @@ else:
 mergedData = indexDF.merge(stockDF, how='inner',
                          left_index=True, right_index=True,
                          suffixes=("_Index","_Stock"))
-
-st.write(mergedData)                           
-mergedData.dropna(inplace=True)
+                      
+mergedData.dropna(inplace=True) #same as: mergedData = mergedData.dropna()
 mergedData['Date'] = mergedData.index
-    #same as: mergedData = mergedData.dropna()
 #%% Regression Model
 mergedData['Constant'] = 1 #used to calculate alpha or y-intercept 
 
@@ -267,6 +265,9 @@ else:
     mergedData['Predictions'] = results.predict(mergedData['Returns_Index'])
 r2 = results.rsquared
 beta = results.params[0]
+
+st.write(mergedData)     
+
 #%% Visualizations
 chartTitle = "Linear Regression {} vs {}".format(stockDrop, indexDrop)
 subTitle = "R2:{:.4f} Beta:{:.4f}".format(r2, beta)
