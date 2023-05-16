@@ -103,45 +103,6 @@ def convert_to_unix(date):
     
     return int(mktime(datum.timetuple())) + 86400 #adding 1 day due to timezone issue
 
-
-# @st.cache
-def fnYFinHist_old(stock, interval='1d', day_begin='01-01-2013', day_end='17-11-2021'):
-    """
-    queries yahoo finance api to receive historical data in csv file format
-    
-    parameters: 
-        stock - short-handle identifier of the company
-        interval - 1d, 1wk, 1mo - daily, weekly monthly data
-        day_begin - starting date for the historical data (format: dd-mm-yyyy)
-        day_end - final date of the data (format: dd-mm-yyyy)
-    
-    returns a list of comma seperated value lines
-    """
-    
-    day_begin_unix = convert_to_unix(day_begin)
-    day_end_unix = convert_to_unix(day_end)
-    header, crumb, cookies = get_crumbs_and_cookies(stock)
-    cookies = st.secrets.cookies
-    
-    with requests.session():
-        # url = 'https://query1.finance.yahoo.com/v7/finance/download/' \
-        #       '{stock}?period1={day_begin}&period2={day_end}&interval={interval}&events=history&crumb={crumb}' \
-        #       .format(stock=stock, 
-        #               day_begin=day_begin_unix, day_end=day_end_unix,
-        #               interval=interval, crumb=crumb)
-        url = 'https://query1.finance.yahoo.com/v7/finance/download/' \
-              '{stock}?period1={day_begin}&period2={day_end}&interval={interval}&events=history' \
-              .format(stock=stock, 
-                      day_begin=day_begin_unix, day_end=day_end_unix,
-                      interval=interval)
-                
-        website = requests.get(url, headers=header, cookies=cookies)
-
-    st.write(website.text)
-    data = pd.read_csv(StringIO(website.text), parse_dates=['Date'], index_col=['Date'])
-    data['Returns'] = data['Close'].pct_change()
-    return data
-
 # @st.cache
 def fnYFinJSON(stock, field):
     if not stock:
@@ -177,6 +138,7 @@ def grabPricingAll(ticker, interval="1d", period_start="2013-01-01", period_end=
     df = yf.download(ticker, interval=interval, start=period_start, end=period_end)
     df['Returns'] = df['Close'].pct_change()
     df.reset_index(inplace=True)
+    df['Date'] = pd.to_datetime(df['Date'])
     df['Date'] = df['Date'].dt.normalize()
     df.set_index('Date', inplace=True)
     #st.write(data)
