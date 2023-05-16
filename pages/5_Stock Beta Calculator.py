@@ -211,7 +211,8 @@ stockDF.index = stockDF.index.date
 
 indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
 indexDF.index = indexDF.index.date
-
+st.write("DEBUG")
+st.write(indexDF)
 #indexDF = yf.download(indexTicker,interval=interval,start=dayStart,end=dayEnd)
 # st.write(stockDF)
 # st.write(indexDF)
