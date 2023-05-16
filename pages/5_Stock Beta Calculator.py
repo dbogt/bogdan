@@ -203,9 +203,6 @@ dayStart = '{:%Y-%m-%d}'.format(startDate)
 dayEnd = '{:%Y-%m-%d}'.format(endDate)
 
 stockDF = grabPricingAll(stockDrop, interval, dayStart, dayEnd)
-st.write("DEBUG")
-st.write(stockDF)
-
 stockDF.index = stockDF.index.date
 
 indexDF = grabPricingAll(indexTicker, interval, dayStart, dayEnd)
