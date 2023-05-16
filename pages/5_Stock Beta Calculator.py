@@ -191,9 +191,6 @@ with st.sidebar.form(key='inputs_form'):
     addConst = st.checkbox('Add Constant', value=True)
     submit_btn = st.form_submit_button(label='submit')
 
-#Old demo codes without the YFin scrapes
-# stockDF = grabDF(stockDrop + ".csv")
-# indexDF = grabDF(indexDrop + ".csv")
 #%% Grab Data
 indexTickersMap = {'S&P 500':"^GSPC",'Russell 2000':'^RUT','FTSE 100':'^FTSE',
                    'Nikkei 225':'^N225','Gold':'GC=F','S&P/TSX':'^GSPTSE','S&P/ASX':'STW.AX','Italy 40':'^BIT40P'}
@@ -250,7 +247,7 @@ mergedData = indexDF.merge(stockDF, how='inner',
                          left_index=True, right_index=True,
                          suffixes=("_Index","_Stock"))
 
-# st.write(mergedData)                           
+st.write(mergedData)                           
 mergedData.dropna(inplace=True)
 mergedData['Date'] = mergedData.index
     #same as: mergedData = mergedData.dropna()
