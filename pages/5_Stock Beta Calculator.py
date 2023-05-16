@@ -263,7 +263,7 @@ else:
 r2 = results.rsquared
 beta = results.params[0]
 
-st.write(mergedData)     
+# st.write(mergedData)     
 
 #%% Visualizations
 chartTitle = "Linear Regression {} vs {}".format(stockDrop, indexDrop)
