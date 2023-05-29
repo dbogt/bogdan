@@ -60,7 +60,10 @@ crumb = st.text_input("enter your crumb")
 urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
 st.write(urlData + "&crumb=" + crumb)
 response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
-st.write(response.json())
+data = response.json()
+st.write(data)
+df2 = pd.DataFrame(data['quoteResponse']['result']_)
+st.write(df2)
 
 df = fnYFinJSONAll(ticker)
 st.write(df)
