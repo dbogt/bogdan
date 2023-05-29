@@ -63,7 +63,8 @@ response = requests.get(urlData, params=params, cookies=cookies, headers=headers
 data = response.json()
 st.write(data)
 df2 = pd.DataFrame(data['quoteResponse']['result'])
+df2.set_index('symbol',inplace=True)
 st.write(df2)
 
-df = fnYFinJSONAll(ticker)
-st.write(df)
+#df = fnYFinJSONAll(ticker)
+#st.write(df)
