@@ -22,11 +22,12 @@ headers = {
 }
 
 params = {
-    'crumb': st.secrets['crumb'],
+    'crumb': 'aQXXlwvY/Hw',
     'lang': 'en-US',
     'region': 'US',
     'corsDomain': 'finance.yahoo.com',
 }
+
 def fnYFinJSON(stock, field):
     df = fnYFinJSONAll(stock)
     if field in df.columns:
