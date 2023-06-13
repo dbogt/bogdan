@@ -9,7 +9,7 @@ text = """
 
 - :computer: Connect with me on **[LinkedIn](https://www.linkedin.com/in/tudosebogdan/)**
 - :newspaper: Read some of my Python articles on **[Medium](https://medium.com/@bogdan-tudose)**
-- :office: I'm currently a Principal and instructor for **[The Marque Group](https://marqueegroup.ca/)**
+- :office: I'm currently Co-Head of Data Science and instructor for **[The Marque Group](https://marqueegroup.ca/)** and **[Training The Street](https://trainingthestreet.com/bogdan-tudose/)**
 - :school: Check out some of the programming courses I teach:
   - [Python 1: Core Data Analysis](https://marqueegroup.ca/course/python-1-core-data-analysis/)  
   - [Python 2: Visualization and Analysis](https://marqueegroup.ca/course/python-2-visualization-and-analysis/)
