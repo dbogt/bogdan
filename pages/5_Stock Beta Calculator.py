@@ -21,7 +21,7 @@ from io import StringIO, BytesIO
 from urllib.request import Request, urlopen  
 import json
 import yfinance as yf
-import yfUDFs as bogYF
+import yfinUDFs as bogYF
 
 #%% Yahoo Finance Cookies
 #cookies = st.secrets.cookies
