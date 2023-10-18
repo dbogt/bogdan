@@ -37,6 +37,7 @@ https://bogdan-tudose.medium.com/
 - https://pbpython.com/ - newsletter/blog with some practical business applications
 
 ## Python for Finance in Excel Demos - HumpDay Coding Tips Series
+- All source Excel files: https://github.com/dbogt/PythonExcel/tree/main
 - Demo #1 - Merge and FillNA - [LinkedIn Post](https://www.linkedin.com/posts/tudosebogdan_humpday-coding-tips-series-python-for-finance-activity-7102759537509560320-97vg?utm_source=share&utm_medium=member_desktop)
 - Demo #2 - Moving Averages Chart 📈 - [LinkedIn Post](https://www.linkedin.com/posts/tudosebogdan_python-pythonforfinance-pythonexcel-activity-7105316217996939264-c3Hn?utm_source=share&utm_medium=member_desktop)
 - Demo #3 - Dynamic Pivots with GroupBy - [LinkedIn Post](https://www.linkedin.com/posts/tudosebogdan_python-pythonforfinance-pythonexcel-activity-7107914657834692608-NVz_?utm_source=share&utm_medium=member_desktop)
