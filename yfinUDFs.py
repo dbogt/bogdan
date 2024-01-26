@@ -90,9 +90,12 @@ def grabExpDates(ticker):
     e.g.: https://query2.finance.yahoo.com/v7/finance/options/SPY
     
     """
-    #url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
-    url = "https://query2.finance.yahoo.com/v7/finance/options/"+ ticker + "?crumb=aQXXlwvY%2FHw"
-    data = pd.read_json(url)
+    url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
+    #data = pd.read_json(url)
+    
+    response = requests.get(url, params=params, cookies=cookies, headers=headers)
+    data = response.json()
+
     expDatesUnix = data['optionChain']['result'][0]['expirationDates']
     expDatesNormal = pd.to_datetime(expDatesUnix, origin="unix",unit='s')
     df = pd.DataFrame(expDatesUnix,index=expDatesNormal,columns=["Unix Date"])
@@ -120,7 +123,11 @@ def optionChain(ticker='SPY', date='2022-11-18', calls_puts = 'calls'):
     url = "https://query2.finance.yahoo.com/v7/finance/options/{}?date={}"
     unixTS = pd.Timestamp('{} 00:00:00'.format(date)).timestamp()
     url = url.format(ticker, int(unixTS))
-    data = pd.read_json(url)
+
+    response = requests.get(url, params=params, cookies=cookies, headers=headers)
+    data = response.json()
+    
+    #data = pd.read_json(url)
     optionsData = data['optionChain']['result'][0]['options'][0]
     dfOptions = pd.DataFrame(optionsData[calls_puts])
     dfOptions['Exp'] = pd.to_datetime(dfOptions['expiration'],origin="unix",unit='s')
