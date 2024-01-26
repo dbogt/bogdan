@@ -90,7 +90,8 @@ def grabExpDates(ticker):
     e.g.: https://query2.finance.yahoo.com/v7/finance/options/SPY
     
     """
-    url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
+    #url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
+    url = "https://query2.finance.yahoo.com/v7/finance/options/"+ ticker + "?crumb=aQXXlwvY%2FHw"
     data = pd.read_json(url)
     expDatesUnix = data['optionChain']['result'][0]['expirationDates']
     expDatesNormal = pd.to_datetime(expDatesUnix, origin="unix",unit='s')
