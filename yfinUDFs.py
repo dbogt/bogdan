@@ -22,7 +22,7 @@ headers = {
 }
 
 params = {
-    'crumb': 'aQXXlwvY/Hw',
+    'crumb': st.secrets['crumb'],
     'lang': 'en-US',
     'region': 'US',
     'corsDomain': 'finance.yahoo.com',
