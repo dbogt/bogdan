@@ -93,8 +93,8 @@ colInputs, colOutputs  = st.columns([1,1])
 with colInputs:
     ticker = st.text_input("Ticker:","SPY")
     expDF = yf.grabExpDates(ticker)
-    #link = "https://query2.finance.yahoo.com/v7/finance/options/{}?date=".format(ticker)
-    link = "https://query2.finance.yahoo.com/v7/finance/options/{}?crumb=aQXXlwvY%2FHw".format(ticker)
+    link = "https://query2.finance.yahoo.com/v7/finance/options/{}?date=".format(ticker)
+    
     expDF['Link'] = expDF.apply(lambda x: link+str(x['Unix Date']), axis=1)
     allDates = list(expDF.index.strftime('%Y-%m-%d'))
     expDate = st.selectbox("Pick expiry date:", allDates, index=0)
