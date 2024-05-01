@@ -360,7 +360,9 @@ st.header("Regression Line with Plotly")
 st.plotly_chart(figRegr)
 
 ##%Histogram with Normal Distribution Curve
-figDist = ff.create_distplot([mergedData['Returns_Index'], mergedData['Returns_Stock']], ["Returns Index", "Returns Stock"])
+x1 = np.array(mergedData['Returns_Index'].dropna() * 100)
+x2 = np.array(mergedData['Returns_Stock'].dropna() * 100)
+figDist = ff.create_distplot([x1, x2], ["Returns Index", "Returns Stock"], bin_size=.5, curve_type='normal')
 st.header("Hitogram of Returns")
 st.plotly_chart(figDist)
 
