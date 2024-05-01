@@ -22,6 +22,7 @@ from urllib.request import Request, urlopen
 import json
 import yfinance as yf
 import yfinUDFs as bogYF
+import plotly.figure_factory as ff #normal distribution curve
 
 #%% Yahoo Finance Cookies
 #cookies = st.secrets.cookies
@@ -358,6 +359,11 @@ with col7:
 st.header("Regression Line with Plotly")
 st.plotly_chart(figRegr)
 
+##%Histogram with Normal Distribution Curve
+figDist = ff.create_distplot([mergedData['Returns_Index'], mergedData['Returns_Stock']], ["Returns Index", "Returns Stock"])
+st.header("Hitogram of Returns")
+st.plotly_chart(figDist)
+
 #Dataframe output    
 st.header("Combined Data Set:")
 st.write(mergedData)
@@ -379,27 +385,13 @@ def createHtml(chart1, chart2, chart3):
     string4 = createOLSFile(results, 'html')
     allHtml = "".join([string1, string2, string3, string4])
     return allHtml
-    
-
-#@st.cache(allow_output_mutation=True)
-# def createExcel():
-#     buffer = BytesIO()
-#     with pd.ExcelWriter(buffer) as writer:
-#         stockDF.to_excel(writer, sheet_name=stockDrop, index=True)
-#         indexDF.to_excel(writer, sheet_name=indexDrop, index=True)
-#         mergedData.to_excel(writer, sheet_name="Merged", index=True)
-#     return buffer
 
 st.sidebar.header("Download Outputs")
 st.sidebar.download_button(
     label="Download Plotly Graphs + OLS",
     data=createHtml(fig3,figStock,figIndex),
     file_name='regression.html')        
-
-# st.sidebar.download_button(
-#     label="Download data as Excel",
-#     data=createExcel(),
-#     file_name='stock_prices.xlsx')        
+     
         
 #Download OLS Results
 olsFileType = st.sidebar.radio('OLS Export Format',['csv','html'])
