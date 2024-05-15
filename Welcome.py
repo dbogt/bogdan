@@ -1,5 +1,9 @@
 import streamlit as st
-
+st.set_page_config(layout="wide",page_title='Bogdan Tudose',
+menu_items={
+        "About": f"Bogdan Python Demos"
+        f"\nApp contact: [Bogdan Tudose](mailto:bogdan.tudose@trainingthestreet.com)"
+    })
 st.sidebar.markdown("# Main page 🎈")
 
 text = """
