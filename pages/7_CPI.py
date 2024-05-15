@@ -32,7 +32,7 @@ def grab_cpi():
   df = pd.melt(filterDF, var_name='CPI Metric',value_vars=filterDF.columns, ignore_index=False)
   return filterDF, df
 
-df, melt = grap_cpi()
+df, melt = grab_cpi()
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
                      "value": "Inflation (%)"},
