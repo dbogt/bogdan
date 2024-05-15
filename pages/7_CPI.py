@@ -72,13 +72,14 @@ lastCanadaDate = df.index[0]
 lastUSCPI = dfUS.iloc[0]['value'] / 100
 lastUSDate = dfUS.iloc[0]['date']
 output = "{:,.2%}"
+
+
+st.title("CPI Data - Canada vs US")
+col1, col2 = st.columns(2)
 with col1:
     st.metric(f"Canada CPI ({lastCanadaDate:%Y-%m})", output.format(lastCanadaCPI))
 with col2:
     st.metric(f"US CPI ({lastUSDate:%Y-%m})", output.format(lastUSCPI))
-
-st.title("CPI Data - Canada vs US")
-
 col1, col2 = st.columns(2)
 
 
