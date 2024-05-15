@@ -74,7 +74,8 @@ figUS = px.line(dfUS, x='date', y='value',
               labels={"date": "Date",'value':'Inflation (%)'},
               title='US CPI (Source: FRED)')
 
-figBoth = px.line(merged, y=['CPI Canada','CPI US'], title='US vs Canada CPI (%)')
+figBoth = px.line(merged, y=['CPI Canada','CPI US'], title='US vs Canada CPI (%)',
+                 labels={"index": "Date",'value':'Inflation (%)'})
 
 lastCanadaCPI = df.iloc[0]['Total CPI'] / 100
 lastCanadaDate = df.index[0]
