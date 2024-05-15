@@ -94,10 +94,12 @@ with col2:
     st.metric(f"US CPI ({lastUSDate:%Y-%m})", output.format(lastUSCPI), delta=output.format(deltaUS))
 col1, col2 = st.columns(2)
 
-
+st.plotly_chart(figBoth, use_container_width=True)
 st.plotly_chart(fig, use_container_width=True)
 st.plotly_chart(figUS, use_container_width=True)
-st.plotly_chart(figBoth, use_container_width=True)
+
+st.title('Canada vs. US CPI')
+st.dataframe(merged)
 
 st.title('Canada CPI Data (Source: BoC)')
 st.dataframe(df)
@@ -106,8 +108,7 @@ st.write("Consumer Price Index for All Urban Consumers: All Items in U.S. City A
 st.write("Source: https://fred.stlouisfed.org/series/CPIAUCNS#0")
 st.dataframe(dfUS[['value']])
 
-st.title('Canada vs. US')
-st.dataframe(merged)
+
 
 
 #st.dataframe(df,column_config={"Month":st.column_config.DateColumn()})
