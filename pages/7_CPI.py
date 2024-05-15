@@ -64,6 +64,7 @@ df, melt = grab_cpi()
 dfUS = grab_fred_cpi()
 merged = df[['Total CPI']].merge(dfUS[['value']], how='outer', left_index=True, right_index=True)
 merged.columns = ['CPI Canada','CPI US']
+merged.sort_index(ascending=False, inplace=True)
 
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
@@ -73,6 +74,7 @@ figUS = px.line(dfUS, x='date', y='value',
               labels={"date": "Date",'value':'Inflation (%)'},
               title='US CPI (Source: FRED)')
 
+figBoth = px.line(merged, y=['CPI Canada','CPI US'], title='US vs Canada CPI (%)')
 
 lastCanadaCPI = df.iloc[0]['Total CPI'] / 100
 lastCanadaDate = df.index[0]
@@ -94,6 +96,7 @@ col1, col2 = st.columns(2)
 
 st.plotly_chart(fig, use_container_width=True)
 st.plotly_chart(figUS, use_container_width=True)
+st.plotly_chart(figBoth, use_container_width=True)
 
 st.title('Canada CPI Data (Source: BoC)')
 st.dataframe(df)
