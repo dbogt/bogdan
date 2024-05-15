@@ -40,5 +40,5 @@ fig = px.line(melt, y='value', color='CPI Metric',
 
 st.plotly_chart(fig, use_container_width=True)
 df.index = df.index.date
-st.write(df)
+st.dataframe(df)
 #st.dataframe(df,column_config={"Month":st.column_config.DateColumn()})
