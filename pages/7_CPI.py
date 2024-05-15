@@ -16,7 +16,7 @@ Created by: [Bogdan Tudose](https://www.linkedin.com/in/tudosebogdan/) \n
 Date: May 15, 2024 \n
 Purpose: Compare different CPI indicators in Canada and US. \n
 Source Canada: https://www.bankofcanada.ca/rates/price-indexes/cpi/ \n
-Source US: https://fred.stlouisfed.org/series/CWSR0000SA0#0
+Source US: https://fred.stlouisfed.org/series/CPIAUCNS#0
 """
 with st.expander("See app info"):
     st.write(appDetails)
@@ -102,7 +102,8 @@ st.plotly_chart(figBoth, use_container_width=True)
 st.title('Canada CPI Data (Source: BoC)')
 st.dataframe(df)
 st.title('US CPI Data (Source: FRED)')
-st.write("Source: https://fred.stlouisfed.org/series/CWSR0000SA0#0")
+st.write("Consumer Price Index for All Urban Consumers: All Items in U.S. City Average (CPIAUCNS)")
+st.write("Source: https://fred.stlouisfed.org/series/CPIAUCNS#0")
 st.dataframe(dfUS[['value']])
 
 st.title('Canada vs. US')
