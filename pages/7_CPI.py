@@ -57,20 +57,20 @@ def grab_fred_cpi():
 
 
 df, melt = grab_cpi()
-usCPI = grab_fred_cpi()
+dfUS = grab_fred_cpi()
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
                      "value": "Inflation (%)"},
               title='Canada CPI Indicators (Source: Bank of Canada)')
-figUS = px.line(usCPI, x='date', y='value',
+figUS = px.line(dfUS, x='date', y='value',
               labels={"date": "Date",'value':'Inflation (%)'},
               title='US CPI (Source: FRED)')
 
 
 lastCanadaCPI = df.iloc[0]['Total CPI'] / 100
 lastCanadaDate = df.index[0]
-lastUSCPI = df.iloc[0]['value'] / 100
-lastUSDate = df.iloc[0]['date']
+lastUSCPI = dfUS.iloc[0]['value'] / 100
+lastUSDate = dfUS.iloc[0]['date']
 output = "{:,.2%}"
 with col1:
     st.metric(f"Canada CPI ({lastCanadaDate:%Y-%m})", output.format(lastCanadaCPI))
@@ -88,5 +88,5 @@ st.plotly_chart(figUS, use_container_width=True)
 st.title('Canada CPI Data (Source: BoC)')
 st.dataframe(df)
 st.title('US CPI Data (Source: FRED)')
-st.dataframe(usCPI)
+st.dataframe(dfUS)
 #st.dataframe(df,column_config={"Month":st.column_config.DateColumn()})
