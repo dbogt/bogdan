@@ -63,7 +63,7 @@ dfUS = grab_fred_cpi()
 
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
-                     "value": "Inflation (%)", index='Date'},
+                     "value": "Inflation (%)", index:'Date'},
               title='Canada CPI Indicators (Source: Bank of Canada)')
 figUS = px.line(dfUS, x='date', y='value',
               labels={"date": "Date",'value':'Inflation (%)'},
