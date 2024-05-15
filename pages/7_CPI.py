@@ -19,7 +19,7 @@ Source: https://www.bankofcanada.ca/rates/price-indexes/cpi/
 with st.expander("See app info"):
     st.write(appDetails)
 
-@st.cache_data
+@st.cache
 def grab_cpi():
   url = 'https://www.bankofcanada.ca/rates/price-indexes/cpi/'
   df = pd.read_html(url)[0]
