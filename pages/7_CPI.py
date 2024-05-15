@@ -59,7 +59,7 @@ def grab_fred_cpi():
 df, melt = grab_cpi()
 dfUS = grab_fred_cpi()
 df['MoM'] = df['Total CPI'] - df['Total CPI'].shift(-1)
-dfUS['MoM'] = df['value'] - df['value'].shift(-1)
+dfUS['MoM'] = dfUS['value'] - dfUS['value'].shift(-1)
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
                      "value": "Inflation (%)"},
