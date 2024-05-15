@@ -1,6 +1,7 @@
 import plotly.express as px
 import pandas as pd
 import streamlit as st
+import requests
 
 #%% Streamlit Controls
 st.set_page_config(layout="wide",page_title='Options Calculator',
@@ -33,13 +34,40 @@ def grab_cpi():
   df = pd.melt(filterDF, var_name='CPI Metric',value_vars=filterDF.columns, ignore_index=False)
   return filterDF, df
 
+@st.cache
+def grab_fred_cpi():
+  token = st.secrets['fredKEY']
+  rootURL = 'https://api.stlouisfed.org/fred/series/observations?series_id='
+  seriesID = 'CWSR0000SA0'
+  apiKey = '&api_key=' + token #please change this to your API KEY
+  fileType = '&file_type=json'
+  freq = '&frequency=m' #change d to m, y, etc.
+  units = '&units=pc1' #pc1=percent change year ago
+  url= rootURL + seriesID + apiKey + fileType + freq + units
+
+  req = requests.get(url)
+  data = req.json()
+  df = pd.DataFrame(data['observations'])
+  df =df[ df['value']!='.' ]
+  df['date'] = pd.to_datetime(df['date'])
+  df['value'] = pd.to_numeric(df['value'])
+  return df
+
+
 df, melt = grab_cpi()
+usCPI = grap_fred_cpi()
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
                      "value": "Inflation (%)"},
-              title='CPI Indicators (Source:Bank of Canada)')
-
+              title='Canada CPI Indicators (Source: Bank of Canada)')
+figUS = px.line(usCPI, x='date', y='value',
+              labels={"date": "Date",'value':'Inflation (%)'},
+              title='US CPI (Source: FRED)')
 st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(figUS, use_container_width=True)
 
+st.title('Canada CPI Data (Source: BoC)')
 st.dataframe(df)
+st.title('US CPI Data (Source: FRED)')
+st.dataframe(usCPI)
 #st.dataframe(df,column_config={"Month":st.column_config.DateColumn()})
