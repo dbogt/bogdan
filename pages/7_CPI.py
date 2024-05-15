@@ -55,7 +55,7 @@ def grab_fred_cpi():
 
 
 df, melt = grab_cpi()
-usCPI = grap_fred_cpi()
+usCPI = grab_fred_cpi()
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
                      "value": "Inflation (%)"},
