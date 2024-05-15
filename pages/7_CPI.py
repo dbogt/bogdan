@@ -40,7 +40,7 @@ token = st.secrets['fredKEY']
 @st.cache
 def grab_fred_cpi():
   rootURL = 'https://api.stlouisfed.org/fred/series/observations?series_id='
-  seriesID = 'CWSR0000SA0'
+  seriesID = 'CPIAUCNS' # 'CWSR0000SA0'
   apiKey = '&api_key=' + token #please change this to your API KEY
   fileType = '&file_type=json'
   freq = '&frequency=m' #change d to m, y, etc.
