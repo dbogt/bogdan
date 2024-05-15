@@ -34,9 +34,9 @@ def grab_cpi():
   df = pd.melt(filterDF, var_name='CPI Metric',value_vars=filterDF.columns, ignore_index=False)
   return filterDF, df
 
+token = st.secrets['fredKEY']
 @st.cache
 def grab_fred_cpi():
-  token = st.secrets['fredKEY']
   rootURL = 'https://api.stlouisfed.org/fred/series/observations?series_id='
   seriesID = 'CWSR0000SA0'
   apiKey = '&api_key=' + token #please change this to your API KEY
