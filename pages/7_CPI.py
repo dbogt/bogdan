@@ -14,8 +14,9 @@ menu_items={
 appDetails = """
 Created by: [Bogdan Tudose](https://www.linkedin.com/in/tudosebogdan/) \n
 Date: May 15, 2024 \n
-Purpose: Compare different CPI indicators in Canada and US.
-Source: https://www.bankofcanada.ca/rates/price-indexes/cpi/
+Purpose: Compare different CPI indicators in Canada and US. \n
+Source Canada: https://www.bankofcanada.ca/rates/price-indexes/cpi/ \n
+Source US: https://fred.stlouisfed.org/series/CWSR0000SA0#0
 """
 with st.expander("See app info"):
     st.write(appDetails)
@@ -53,6 +54,7 @@ def grab_fred_cpi():
   df['date'] = pd.to_datetime(df['date'])
   df['value'] = pd.to_numeric(df['value'])
   df.sort_values('date',ascending=False,inplace=True)
+  df.index = df['date'].dt.date
   df = df[['date','value']]   
   df['MoM'] = df['value'] - df['value'].shift(-1)
   return df
@@ -60,6 +62,7 @@ def grab_fred_cpi():
 
 df, melt = grab_cpi()
 dfUS = grab_fred_cpi()
+
 
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
@@ -95,5 +98,5 @@ st.title('Canada CPI Data (Source: BoC)')
 st.dataframe(df)
 st.title('US CPI Data (Source: FRED)')
 st.write("Source: https://fred.stlouisfed.org/series/CWSR0000SA0#0")
-st.dataframe(dfUS)
+st.dataframe(dfUS[['value']])
 #st.dataframe(df,column_config={"Month":st.column_config.DateColumn()})
