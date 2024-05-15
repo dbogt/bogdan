@@ -52,12 +52,14 @@ def grab_fred_cpi():
   df['date'] = pd.to_datetime(df['date'])
   df['value'] = pd.to_numeric(df['value'])
   df.sort_values('date',ascending=False,inplace=True)
-  df = df[['date','value']]      
+  df = df[['date','value']]   
   return df
 
 
 df, melt = grab_cpi()
 dfUS = grab_fred_cpi()
+df['MoM'] = df['Total CPI'] - df['Total CPI'].shift(-1)
+dfUS['MoM'] = df['value'] - df['value'].shift(-1)
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
                      "value": "Inflation (%)"},
@@ -71,15 +73,17 @@ lastCanadaCPI = df.iloc[0]['Total CPI'] / 100
 lastCanadaDate = df.index[0]
 lastUSCPI = dfUS.iloc[0]['value'] / 100
 lastUSDate = dfUS.iloc[0]['date']
+deltaCanada = df.iloc[0]['MoM'] / 100
+deltaUS = dfUS.iloc[0]['MoM'] / 100
 output = "{:,.2%}"
 
 
 st.title("CPI Data - Canada vs US")
 col1, col2 = st.columns(2)
 with col1:
-    st.metric(f"Canada CPI ({lastCanadaDate:%Y-%m})", output.format(lastCanadaCPI))
+    st.metric(f"Canada CPI ({lastCanadaDate:%Y-%m})", output.format(lastCanadaCPI), delta=output.format(deltaCanada))
 with col2:
-    st.metric(f"US CPI ({lastUSDate:%Y-%m})", output.format(lastUSCPI))
+    st.metric(f"US CPI ({lastUSDate:%Y-%m})", output.format(lastUSCPI), delta=output.format(deltaUS))
 col1, col2 = st.columns(2)
 
 
