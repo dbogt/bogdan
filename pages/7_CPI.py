@@ -62,7 +62,8 @@ def grab_fred_cpi():
 
 df, melt = grab_cpi()
 dfUS = grab_fred_cpi()
-
+merged = df[['Total CPI']].merge(dfUS[['value']], how='outer', left_index=True, right_index=True)
+merged.columns = ['CPI Canada','CPI US']
 
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
@@ -99,4 +100,9 @@ st.dataframe(df)
 st.title('US CPI Data (Source: FRED)')
 st.write("Source: https://fred.stlouisfed.org/series/CWSR0000SA0#0")
 st.dataframe(dfUS[['value']])
+
+st.title('Canada vs. US')
+st.dataframe(merged)
+
+
 #st.dataframe(df,column_config={"Month":st.column_config.DateColumn()})
