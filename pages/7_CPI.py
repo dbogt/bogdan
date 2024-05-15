@@ -29,6 +29,7 @@ def grab_cpi():
   df['Month'] = pd.to_datetime(df['Month'])
   df.set_index('Month',inplace=True) 
   filterDF = df.iloc[:, 2:]
+  filterDF.index = filterDF.index.date
   df = pd.melt(filterDF, var_name='CPI Metric',value_vars=filterDF.columns, ignore_index=False)
   return filterDF, df
 
@@ -39,6 +40,6 @@ fig = px.line(melt, y='value', color='CPI Metric',
               title='CPI Indicators (Source:Bank of Canada)')
 
 st.plotly_chart(fig, use_container_width=True)
-df.index = df.index.date
+
 st.dataframe(df)
 #st.dataframe(df,column_config={"Month":st.column_config.DateColumn()})
