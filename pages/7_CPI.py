@@ -32,7 +32,7 @@ def grab_cpi():
   filterDF = df.iloc[:, 2:]
   filterDF.index = filterDF.index.date
   df = pd.melt(filterDF, var_name='CPI Metric',value_vars=filterDF.columns, ignore_index=False)
-  df['MoM'] = df['Total CPI'] - df['Total CPI'].shift(-1)
+  filterDF['MoM'] = filterDF['Total CPI'] - filterDF['Total CPI'].shift(-1)
   return filterDF, df
 
 token = st.secrets['fredKEY']
