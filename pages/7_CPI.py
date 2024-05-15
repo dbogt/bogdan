@@ -32,6 +32,7 @@ def grab_cpi():
   filterDF = df.iloc[:, 2:]
   filterDF.index = filterDF.index.date
   df = pd.melt(filterDF, var_name='CPI Metric',value_vars=filterDF.columns, ignore_index=False)
+  df['MoM'] = df['Total CPI'] - df['Total CPI'].shift(-1)
   return filterDF, df
 
 token = st.secrets['fredKEY']
@@ -53,13 +54,13 @@ def grab_fred_cpi():
   df['value'] = pd.to_numeric(df['value'])
   df.sort_values('date',ascending=False,inplace=True)
   df = df[['date','value']]   
+  df['MoM'] = df['value'] - df['value'].shift(-1)
   return df
 
 
 df, melt = grab_cpi()
 dfUS = grab_fred_cpi()
-df['MoM'] = df['Total CPI'] - df['Total CPI'].shift(-1)
-dfUS['MoM'] = dfUS['value'] - dfUS['value'].shift(-1)
+
 fig = px.line(melt, y='value', color='CPI Metric',
               labels={
                      "value": "Inflation (%)"},
