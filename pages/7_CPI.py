@@ -4,7 +4,7 @@ import streamlit as st
 import requests
 
 #%% Streamlit Controls
-st.set_page_config(layout="wide",page_title='Options Calculator',
+st.set_page_config(layout="wide",page_title='CPI Comparison',
 menu_items={
         "About": f"CPI - Inflation Data"
         f"\nApp contact: [Bogdan Tudose](mailto:bogdan.tudose@marqueegroup.ca)",
