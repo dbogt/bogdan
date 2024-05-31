@@ -16,7 +16,8 @@ Created by: [Bogdan Tudose](https://www.linkedin.com/in/tudosebogdan/) \n
 Date: May 15, 2024 \n
 Purpose: Compare different CPI indicators in Canada and US. \n
 Source Canada: https://www.bankofcanada.ca/rates/price-indexes/cpi/ \n
-Source US: https://fred.stlouisfed.org/series/CPIAUCNS#0
+Source US: https://fred.stlouisfed.org/series/CPIAUCNS#0 \n
+Python Code: https://github.com/dbogt/bogdan/blob/main/pages/7_CPI.py
 """
 with st.expander("See app info"):
     st.write(appDetails)
