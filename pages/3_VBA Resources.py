@@ -3,6 +3,9 @@ st.title("VBA Resources")
 st.sidebar.markdown("# VBA Resources")
 
 text = """
+# Training the Street Macros Toolbar
+Use the following link for a 30-day trial to our TTS Macros toolbar: https://appsource.microsoft.com/en-us/product/web-apps/trainingthestreetllc1714397318263.ttesturbos_test?ocid=Bogdan-Tudose
+
 # Personal Macros
 This repo contains personal VBA macros and udfs I've created and collected over the years.
 Direct download link: https://github.com/dbogt/vbaMacros/raw/main/Personal%20Macros.xlsm
