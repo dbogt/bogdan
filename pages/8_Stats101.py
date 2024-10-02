@@ -60,10 +60,9 @@ that's explained by an independent variable or variables in a regression model. 
 goodness of fit and ranges from 0 to 1.
 
 The formula for R-squared is:
-
-\[
+$$
 R^2 = 1 - \frac{\sum (y_i - \hat{y_i})^2}{\sum (y_i - \bar{y})^2}
-\]
+$$
 
 Where:
 - \( y_i \) are the observed values,
