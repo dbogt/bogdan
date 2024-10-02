@@ -84,7 +84,7 @@ st.title("Comparing Linear Regressions")
 text = """The coefficient of determination, or R<sup>2</sup>, is a measure that provides information about the goodness of fit of a model. 
 In the context of regression it is a statistical measure of how well the regression line approximates the actual data. 
 It is therefore important when a statistical model is used either to predict future outcomes or in the testing of hypotheses. 
-There are a number of variants for calculating it, but the widely used one is:
+There are a number of variants for calculating it, but the widely used one is:"""
 
 latext = r'''
 ## Latex example
