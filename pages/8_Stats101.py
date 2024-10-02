@@ -42,9 +42,9 @@ def plot_r2_data(x, y, r2_value, title):
     fig.add_trace(go.Scatter(x=x, y=y_pred, mode='lines', name='Line of Best Fit'))
     
     # Adding R-squared annotation
-    fig.add_annotation(text=f'R-squared: {r2_value:.2f}',
+    fig.add_annotation(text=f'R-squared: {r2_value:.4f}',
                        xref="paper", yref="paper", showarrow=False,
-                       x=0.95, y=0.95, bordercolor="black", borderwidth=2)
+                       x=0.50, y=0.95, bordercolor="black", borderwidth=2)
     
     fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
     return fig
