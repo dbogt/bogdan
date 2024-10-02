@@ -45,7 +45,7 @@ def plot_r2_data(x, y, r2_value):
     model.fit(x.reshape(-1, 1), y)
     y_pred = model.predict(x.reshape(-1, 1))
     coef = model.coef_[0]
-    y_int = model.intercept_[0]
+    y_int = model.intercept_
     title = f"R-squared = {r2_value:.4f} \nEquation: y = {coef} * x + {y_int}"
     
     fig.add_trace(go.Scatter(x=x, y=y_pred, mode='lines', name='Line of Best Fit'))
