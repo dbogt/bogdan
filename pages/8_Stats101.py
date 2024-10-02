@@ -73,8 +73,6 @@ Where:
 - An R-squared of 0.8 means the model explains 80% of the variance.
 - An R-squared of 0 means the model explains none of the variance.
 """
-
-st.write(latext)
 st.markdown(latext)
 
 st.plotly_chart(plot_r2_data(x1, y1, r2_1, "R-squared = 1"))
