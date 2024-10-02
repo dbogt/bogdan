@@ -73,13 +73,6 @@ Where:
 - An R-squared of 1 means the model explains all variability of the target variable.
 - An R-squared of 0.8 means the model explains 80% of the variance.
 - An R-squared of 0 means the model explains none of the variance.
-
-### full equation 
-$$ 
-\Delta G = \Delta\sigma \frac{a}{b} 
-$$ 
-### inline
-Assume $\frac{a}{b}=1$ and $\sigma=0$...
 """)
 
 st.plotly_chart(plot_r2_data(x1, y1, r2_1, "R-squared = 1"))
@@ -94,5 +87,11 @@ It is therefore important when a statistical model is used either to predict fut
 There are a number of variants for calculating it, but the widely used one is:
 
 """
+st.write("""### full equation 
+$$ 
+\Delta G = \Delta\sigma \frac{a}{b} 
+$$ 
+### inline
+Assume $\frac{a}{b}=1$ and $\sigma=0$...""")
 
 st.markdown(text)
