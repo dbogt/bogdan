@@ -86,12 +86,13 @@ In the context of regression it is a statistical measure of how well the regress
 It is therefore important when a statistical model is used either to predict future outcomes or in the testing of hypotheses. 
 There are a number of variants for calculating it, but the widely used one is:
 
-"""
-st.write("""### full equation 
+latext = r'''
+## Latex example
+### full equation 
 $$ 
 \Delta G = \Delta\sigma \frac{a}{b} 
 $$ 
 ### inline
-Assume $\frac{a}{b}=1$ and $\sigma=0$...""")
-
-st.markdown(text)
+Assume $\frac{a}{b}=1$ and $\sigma=0$...  
+'''
+st.write(latext)
