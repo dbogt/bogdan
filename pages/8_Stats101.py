@@ -65,9 +65,9 @@ R^2 = 1 - \frac{\sum (y_i - \hat{y_i})^2}{\sum (y_i - \bar{y})^2}
 $$
 
 Where:
-- $$\( y_i \)$$ are the observed values,
-- $$\( \hat{y_i} \)$$ are the predicted values, and
-- $$\( \bar{y} \)$$ is the mean of observed values.
+- $y_i$ are the observed values,
+- $\hat{y_i}$ are the predicted values, and
+- $\bar{y}$ is the mean of observed values.
 
 - An R-squared of 1 means the model explains all variability of the target variable.
 - An R-squared of 0.8 means the model explains 80% of the variance.
@@ -80,21 +80,3 @@ st.markdown(latext)
 st.plotly_chart(plot_r2_data(x1, y1, r2_1, "R-squared = 1"))
 st.plotly_chart(plot_r2_data(x2, y2, r2_08, "R-squared = 0.8"))
 st.plotly_chart(plot_r2_data(x3, y3, r2_0, "R-squared = 0"))
-
-import streamlit as st
-st.title("Comparing Linear Regressions")
-text = """The coefficient of determination, or R<sup>2</sup>, is a measure that provides information about the goodness of fit of a model. 
-In the context of regression it is a statistical measure of how well the regression line approximates the actual data. 
-It is therefore important when a statistical model is used either to predict future outcomes or in the testing of hypotheses. 
-There are a number of variants for calculating it, but the widely used one is:"""
-
-latext = r'''
-## Latex example
-### full equation 
-$$ 
-\Delta G = \Delta\sigma \frac{a}{b} 
-$$ 
-### inline
-Assume $\frac{a}{b}=1$ and $\sigma=0$...  
-'''
-st.write(latext)
