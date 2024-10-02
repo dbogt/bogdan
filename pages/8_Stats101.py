@@ -52,7 +52,7 @@ def plot_r2_data(x, y, r2_value, title):
 # Streamlit dashboard
 st.title("Understanding R-Squared")
 
-st.markdown("""
+latext = r"""
 ### What is R-squared?
 
 R-squared (R²) is a statistical measure that represents the proportion of the variance for a dependent variable 
@@ -73,7 +73,10 @@ Where:
 - An R-squared of 1 means the model explains all variability of the target variable.
 - An R-squared of 0.8 means the model explains 80% of the variance.
 - An R-squared of 0 means the model explains none of the variance.
-""")
+"""
+
+st.write(latext)
+st.markdown(latext)
 
 st.plotly_chart(plot_r2_data(x1, y1, r2_1, "R-squared = 1"))
 st.plotly_chart(plot_r2_data(x2, y2, r2_08, "R-squared = 0.8"))
