@@ -15,6 +15,11 @@ x1 = np.array([1, 2, 3, 4, 5])
 y1 = 2 * x1 + 1
 r2_1 = r2_score(y1, y1)  # Perfect R-squared
 
+# Dataset with R^2 = 1 Negatively correlated
+x1_neg = np.array([1, 2, 3, 4, 5])
+y1_neg = -2 * x1 + 1
+r2_1_neg = r2_score(y1_neg, y1_neg)  # Perfect R-squared
+
 # Dataset with R^2 = 0.8
 x2 = np.random.rand(100) * 10
 y2 = 2 * x2 + 1 + np.random.normal(0, 2, 100)
@@ -77,5 +82,6 @@ Where:
 st.markdown(latext)
 
 st.plotly_chart(plot_r2_data(x1, y1, r2_1))
+st.plotly_chart(plot_r2_data(x1_neg, y1_neg, r2_1))
 st.plotly_chart(plot_r2_data(x2, y2, r2_08))
 st.plotly_chart(plot_r2_data(x3, y3, r2_0))
