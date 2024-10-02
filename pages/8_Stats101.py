@@ -65,9 +65,9 @@ R^2 = 1 - \frac{\sum (y_i - \hat{y_i})^2}{\sum (y_i - \bar{y})^2}
 $$
 
 Where:
-- \( y_i \) are the observed values,
-- \( \hat{y_i} \) are the predicted values, and
-- \( \bar{y} \) is the mean of observed values.
+- $$\( y_i \)$$ are the observed values,
+- $$\( \hat{y_i} \)$$ are the predicted values, and
+- $$\( \bar{y} \)$$ is the mean of observed values.
 
 - An R-squared of 1 means the model explains all variability of the target variable.
 - An R-squared of 0.8 means the model explains 80% of the variance.
