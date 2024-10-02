@@ -30,7 +30,8 @@ y3_pred = model_3.predict(x3.reshape(-1, 1))
 r2_0 = r2_score(y3, y3_pred)
 
 # Function to create scatter plot and line of best fit
-def plot_r2_data(x, y, r2_value, title):
+def plot_r2_data(x, y, r2_value):
+    title = f"R-squared = {r2_value:.4f}"
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=x, y=y, mode='markers', name='Data'))
     
@@ -75,6 +76,6 @@ Where:
 """
 st.markdown(latext)
 
-st.plotly_chart(plot_r2_data(x1, y1, r2_1, "R-squared = 1"))
-st.plotly_chart(plot_r2_data(x2, y2, r2_08, "R-squared = 0.8"))
-st.plotly_chart(plot_r2_data(x3, y3, r2_0, "R-squared = 0"))
+st.plotly_chart(plot_r2_data(x1, y1, r2_1))
+st.plotly_chart(plot_r2_data(x2, y2, r2_08))
+st.plotly_chart(plot_r2_data(x3, y3, r2_0))
