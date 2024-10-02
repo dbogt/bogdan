@@ -44,6 +44,8 @@ def plot_r2_data(x, y, r2_value):
     model = LinearRegression()
     model.fit(x.reshape(-1, 1), y)
     y_pred = model.predict(x.reshape(-1, 1))
+    coeffs = model.coef_
+    st.write(coeffs)
     
     fig.add_trace(go.Scatter(x=x, y=y_pred, mode='lines', name='Line of Best Fit'))
     
