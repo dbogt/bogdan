@@ -36,7 +36,7 @@ r2_0 = r2_score(y3, y3_pred)
 
 # Function to create scatter plot and line of best fit
 def plot_r2_data(x, y, r2_value):
-    title = f"R-squared = {r2_value:.4f}"
+
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=x, y=y, mode='markers', name='Data'))
     
@@ -44,8 +44,9 @@ def plot_r2_data(x, y, r2_value):
     model = LinearRegression()
     model.fit(x.reshape(-1, 1), y)
     y_pred = model.predict(x.reshape(-1, 1))
-    coeffs = model.coef_
-    st.write(coeffs)
+    coef = model.coef_[0]
+    y_int = model.intercept_[0]
+    title = f"R-squared = {r2_value:.4f} \nEquation: y = {coef} * x + {y_int}"
     
     fig.add_trace(go.Scatter(x=x, y=y_pred, mode='lines', name='Line of Best Fit'))
     
