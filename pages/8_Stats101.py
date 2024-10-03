@@ -148,10 +148,20 @@ df['Residuals - Best Fit'] = df['Y'] - df['Y-Pred']
 df['Residuals - Pick'] = df['Y'] - df['Y-Pick']
 df['Res^2 - Best'] = df['Residuals - Best Fit'] ** 2
 df['Res^2 - Pick'] = df['Residuals - Pick'] ** 2
+df['Res Abs - Best'] = df['Residuals - Best Fit'].abs()
+df['Res Abs - Pick'] = df['Residuals - Pick'].abs()
 SSE_best = df['Res^2 - Best'].sum()
 SSE_pick = df['Res^2 - Pick'].sum()
+MSE_best = df['Res^2 - Best'].mean()
+MSE_pick = df['Res^2 - Pick'].mean()
+MAE_best = df['Res Abs - Best'].mean()
+MAE_pick = df['Res Abs - Pick'].mean()
+
+df_summary = pd.DataFrame( {'SSE':[SSE_best,SSE_pick], 'MSE':[MSE_best,MSE_pick], 'MAE':[MAE_best,MAE_pick]}, index=['Best fit','Picked line'])
+
 st.write(f"Sum of squared errors (line of best fit): {SSE_best:.4f}")
 st.write(f"Sum of squared errors (picked line): {SSE_pick:.4f}")
+st.write(df_summary)
 st.write(df)
 
 latext2=r"""
