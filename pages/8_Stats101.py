@@ -200,3 +200,66 @@ MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y_i}|
 $$
 """
 st.markdown(latext2)
+
+
+### Logistic Regression
+
+
+# Function to calculate sigmoid
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+# Generate data for sigmoid function
+z_values = np.linspace(-10, 10, 500)  # Values for z = beta_0 + beta_1 * x
+sigmoid_values = sigmoid(z_values)
+
+# Example coefficients for logistic regression (beta_0 and beta_1)
+beta_0 = 0  # Intercept
+beta_1 = 1  # Coefficient for feature x
+
+# Linear combination: z = beta_0 + beta_1 * x
+x_values = np.linspace(-10, 10, 500)
+z_comb = beta_0 + beta_1 * x_values
+sigmoid_comb = sigmoid(z_comb)
+
+# Create a plot for the sigmoid function
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=z_values, y=sigmoid_values, mode='lines', name='Sigmoid Function'))
+fig.add_trace(go.Scatter(x=x_values, y=sigmoid_comb, mode='lines', name='Sigmoid with Coefficients'))
+
+# Adding labels and title
+fig.update_layout(title="Sigmoid Function for Logistic Regression",
+                  xaxis_title="z = β₀ + β₁x",
+                  yaxis_title="σ(z) = 1 / (1 + exp(-z))")
+
+# Streamlit dashboard
+st.title("Understanding Logistic Regression")
+
+st.markdown(r"""
+### What is Logistic Regression?
+
+Logistic regression is a type of regression analysis used to predict the probability of a binary outcome (1 or 0) 
+based on one or more independent variables. It models the probability that a given input belongs to the class '1', 
+using the logistic (sigmoid) function.
+
+The model predicts the probability as follows:
+
+\[
+P(y=1 | x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \dots + \beta_n x_n)}}
+\]
+
+Where:
+- \( \beta_0 \) is the intercept (bias term),
+- \( \beta_1, \dots, \beta_n \) are the coefficients for the features \( x_1, \dots, x_n \),
+- \( z = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n \) is the linear combination of input features,
+- \( \sigma(z) = \frac{1}{1 + e^{-z}} \) is the sigmoid function.
+
+The output of the sigmoid function is a probability between 0 and 1, which can be interpreted as the likelihood that the input belongs to the positive class (1).
+
+""")
+
+st.plotly_chart(fig)
+
+
+
+
