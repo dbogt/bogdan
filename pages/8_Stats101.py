@@ -137,7 +137,7 @@ col3.metric("MSE - pick", f"{mse_pick:.4f}")
 col4.metric("RMSE - best", f"{rmse:.4f}")
 col4.metric("RMSE - pick", f"{rmse_pick:.4f}")
 
-title = f"Best Fit Equation: y = {coef:.4f} * x + {y_int:.4f} <br><sup>Picked Line Equation: y = {coef_pick:.4f} * x + {int_pick:.4f}</sup>"
+title = f"Best Fit Equation: y = {coef:.4f} * x + {y_int:.4f} <br><sup>Picked Line Equation: y = {coeff_pick:.4f} * x + {int_pick:.4f}</sup>"
 
 fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
 st.plotly_chart(fig)
