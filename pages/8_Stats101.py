@@ -244,12 +244,15 @@ c1, c2 = st.columns(2)
 beta_0 = c1.slider("Enter beta_0 (intercept):",-50.0,50.0,0.0,step=0.5)  # Intercept
 beta_1 = c2.slider("Enter beta_1 (coefficient):",-10.0,10.0,1.0,step=0.5)  # Coefficient for feature x
 
-sigTextEq = rf"""
-$$
-P(y=1 | x) = \frac{1}{1 + e^{-({beta_0} + {beta_1} x_1)}}
-$$
-"""
-st.write(sigTextEq)
+# sigTextEq = rf"""
+# $$
+# P(y=1 | x) = \frac{1}{1 + e^{-({beta_0} + {beta_1} x_1)}}
+# $$
+# """
+
+
+
+# st.write(sigTextEq)
 
 # Linear combination: z = beta_0 + beta_1 * x
 x_values = np.linspace(-10, 10, 500)
