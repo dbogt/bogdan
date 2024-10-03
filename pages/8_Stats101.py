@@ -146,6 +146,12 @@ st.plotly_chart(fig)
 df = pd.DataFrame({'X':x,'Y':y,'Y-Pred':y_pred,'Y-Pick':y_pick})
 df['Residuals - Best Fit'] = df['Y'] - df['Y-Pred']
 df['Residuals - Pick'] = df['Y'] - df['Y-Pick']
+df['Res^2 - Best'] = df['Residuals - Best Fit'] ** 2
+df['Res^2 - Pick'] = df['Residuals - Pick'] ** 2
+SSE_best = df['Res^2 - Best'].sum()
+SSE_pick = df['Res^2 - Pick'].sum()
+st.write(f"Sum of squared errors (line of best fit): {SSE_best:.4f}")
+st.write(f"Sum of squared errors (picked line): {SSE_pick:.4f}")
 st.write(df)
 
 
