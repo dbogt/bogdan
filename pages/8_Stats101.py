@@ -239,7 +239,7 @@ z_values = np.linspace(-10, 10, 500)  # Values for z = beta_0 + beta_1 * x
 sigmoid_values = sigmoid(z_values)
 
 # Example coefficients for logistic regression (beta_0 and beta_1)
-beta_0 = st.number_input("Enter beta_0 (intercept):",-10.0,10.0,0.0,step=0.10)  # Intercept
+beta_0 = st.number_input("Enter beta_0 (intercept):",-50.0,50.0,0.0,step=0.10)  # Intercept
 beta_1 = st.number_input("Enter beta_1 (coefficient):",-10.0,10.0,1.0,step=0.10)  # Coefficient for feature x
 
 # Linear combination: z = beta_0 + beta_1 * x
