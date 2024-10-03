@@ -97,8 +97,8 @@ st.plotly_chart(plot_r2_data(x3, y3, r2_0))
 st.title("Experiment with your own line of best fit")
 
 pickCol1, pickCol2 = st.columns(2)
-coeff_pick = pickCol1.slider("Pick coefficient",-10.0,10.0,2.0,step=0.5)
-int_pick = pickCol2.slider("Pick intercept",-10.0,10.0,1.0,step=0.5)
+coeff_pick = pickCol1.slider("Pick coefficient (slope)",-10.0,10.0,2.0,step=0.5)
+int_pick = pickCol2.slider("Pick y-intercept",-10.0,10.0,1.0,step=0.5)
 
 # Dataset with R^2 = 0.8
 x = np.random.rand(100) * 10
@@ -142,5 +142,10 @@ title = f"Best Fit Equation: y = {coef:.4f} * x + {y_int:.4f} <br><sup>Picked Li
 
 fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
 st.plotly_chart(fig)
+
+df = pd.DataFrame({'X':x,'Y':y,'Y-Pred':y_pred,'Y-Pick':y_pick})
+df['Residuals - Best Fit'] = df['Y'] - df['Y-Pred']
+df['Residuals - Pick'] = df['Y'] - df['Y-Pick']
+st.write(df)
 
 
