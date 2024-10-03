@@ -58,8 +58,8 @@ def plot_r2_data(x, y, r2_value):
                        xref="paper", yref="paper", showarrow=False,
                        x=0.50, y=0.95, bordercolor="black", borderwidth=2)
     
-    fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
-    fig.update_layout(title_subtitle={'text':"TEST"})
+    fig.update_layout(title=dict(text=title, subtitle=dict(text="test")), xaxis_title='X', yaxis_title='Y')
+    #fig.update_layout(title_subtitle={'text':"TEST"})
     return fig
 
 # Streamlit dashboard
