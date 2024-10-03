@@ -95,15 +95,22 @@ st.plotly_chart(plot_r2_data(x3, y3, r2_0))
 
 #%% Experiment
 st.title("Experiment with your own line of best fit")
+
+coeff_pick = st.slider("Pick coefficient",-10,10,2)
+int_pick = st.slider("Pick intercept",-10,10,1)
+
 # Dataset with R^2 = 0.8
 x = np.random.rand(100) * 10
 y = 2 * x + 1 + np.random.normal(0, 2, 100)
-model = LinearRegression().fit(x.reshape(-1, 1), y4)
-y_pred = model_4.predict(x.reshape(-1, 1))
+y_pick = coeff_pick * x + int_pick
+model = LinearRegression().fit(x.reshape(-1, 1), y)
+y_pred = model.predict(x.reshape(-1, 1))
 r2 = r2_score(y, y_pred)
+r2_pick = r2_score(y, y_pick)
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=x, y=y, mode='markers', name='Data'))
 fig.add_trace(go.Scatter(x=x, y=y_pred, mode='lines', name='Line of Best Fit'))
+fig.add_trace(go.Scatter(x=x, y=y_pick, mode='lines', name='Picked Line of Best Fit'))
 
 # Adding R-squared annotation
 fig.add_annotation(text=f'R-squared: {r2:.4f}',
@@ -112,6 +119,11 @@ fig.add_annotation(text=f'R-squared: {r2:.4f}',
 mae = mean_absolute_error(y, y_pred)
 mse = mean_squared_error(y, y_pred)
 rmse = np.sqrt(mse)
+
+mae_pick = mean_absolute_error(y, y_pick)
+mse_pick = mean_squared_error(y, y_pick)
+rmse_pick = np.sqrt(mse_pick)
+
 coef = model.coef_[0]
 y_int = model.intercept_
 title = f"R-squared = {r2:.4f}; MAE = {mae:.4f}; MSE = {mse:.4f}; RMSE = {rmse:.4f} <br><sup>Equation: y = {coef:.4f} * x + {y_int:.4f}</sup>"
