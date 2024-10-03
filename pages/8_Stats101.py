@@ -49,7 +49,7 @@ def plot_r2_data(x, y, r2_value):
     rmse = np.sqrt(mse)
     coef = model.coef_[0]
     y_int = model.intercept_
-    title = f"R-squared = {r2_value:.4f} <br><sup>Equation: y = {coef:.4f} * x + {y_int:.4f}</sup>"
+    title = f"R-squared = {r2_value:.4f}; MAE = {mae:.4f}; MSE = {mse:.4f}; RMSE = {rmse:.4f} <br><sup>Equation: y = {coef:.4f} * x + {y_int:.4f}</sup>"
     
     fig.add_trace(go.Scatter(x=x, y=y_pred, mode='lines', name='Line of Best Fit'))
     
@@ -58,8 +58,8 @@ def plot_r2_data(x, y, r2_value):
                        xref="paper", yref="paper", showarrow=False,
                        x=0.50, y=0.95, bordercolor="black", borderwidth=2)
     
-    fig.update_layout(title=dict(text=title, subtitle=dict(text="test")), xaxis_title='X', yaxis_title='Y')
-    #fig.update_layout(title_subtitle={'text':"TEST"})
+    #fig.update_layout(title=dict(text=title, subtitle=dict(text="test")), xaxis_title='X', yaxis_title='Y')
+    fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
     return fig
 
 # Streamlit dashboard
