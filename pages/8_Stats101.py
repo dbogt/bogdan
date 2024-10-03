@@ -97,8 +97,8 @@ st.plotly_chart(plot_r2_data(x3, y3, r2_0))
 st.title("Experiment with your own line of best fit")
 
 pickCol1, pickCol2 = st.columns(2)
-coeff_pick = pickCol1.slider("Pick coefficient (slope)",-10.0,10.0,2.0,step=0.5)
-int_pick = pickCol2.slider("Pick y-intercept",-10.0,10.0,1.0,step=0.5)
+coeff_pick = pickCol1.slider("Pick coefficient (slope)",-10.0,10.0,2.0,step=0.05)
+int_pick = pickCol2.slider("Pick y-intercept",-10.0,10.0,1.0,step=0.05)
 
 # Dataset with R^2 = 0.8
 x = np.random.rand(100) * 10
