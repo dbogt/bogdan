@@ -130,8 +130,14 @@ y_int = model.intercept_
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("R-Squared - best", f"{r2:.4f}")
 col1.metric("R-Squared - pick", f"{r2_pick:.4f}")
+col2.metric("MAE - best", f"{mae:.4f}")
+col2.metric("MAE - pick", f"{mae_pick:.4f}")
+col3.metric("MSE - best", f"{mse:.4f}")
+col3.metric("MSE - pick", f"{mse_pick:.4f}")
+col4.metric("RMSE - best", f"{rmse:.4f}")
+col4.metric("RMSE - pick", f"{rmse_pick:.4f}")
 
-title = f"R-squared = {r2:.4f}; MAE = {mae:.4f}; MSE = {mse:.4f}; RMSE = {rmse:.4f} <br><sup>Equation: y = {coef:.4f} * x + {y_int:.4f}</sup>"
+title = f"Best Fit Equation: y = {coef:.4f} * x + {y_int:.4f} <br><sup>Picked Line Equation: y = {coef_pick:.4f} * x + {int_pick:.4f}</sup>"
 
 fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
 st.plotly_chart(fig)
