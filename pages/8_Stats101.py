@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import streamlit as st
 
 # Generating data for different R^2 values
@@ -44,6 +44,9 @@ def plot_r2_data(x, y, r2_value):
     model = LinearRegression()
     model.fit(x.reshape(-1, 1), y)
     y_pred = model.predict(x.reshape(-1, 1))
+    mae = mean_absolute_error(y, y_pred)
+    mse = mean_squared_error(y, y_pred)
+    rmse = np.sqrt(mse)
     coef = model.coef_[0]
     y_int = model.intercept_
     title = f"R-squared = {r2_value:.4f} <br><sup>Equation: y = {coef:.4f} * x + {y_int:.4f}</sup>"
@@ -56,6 +59,7 @@ def plot_r2_data(x, y, r2_value):
                        x=0.50, y=0.95, bordercolor="black", borderwidth=2)
     
     fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
+    fig.update_layout(title_subtitle_text="TEST")
     return fig
 
 # Streamlit dashboard
