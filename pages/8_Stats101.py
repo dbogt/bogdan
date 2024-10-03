@@ -164,31 +164,30 @@ The formula for MSE is:
 $$
 MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y_i})^2
 $$
-
-
-Where:
-- $y_i$ are the observed values,
-- $\hat{y_i}$ are the predicted values.
-
-### Root Mean Squared Error (RMSE)
-
-RMSE is the square root of MSE. It brings the unit back to the original scale of the target variable, making it easier to interpret.
-
-The formula for RMSE is:
-
-$$
-RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y_i})^2}
-$$
-
-### Mean Absolute Error (MAE)
-
-MAE is the average of the absolute differences between the observed actual outcomes and the outcomes predicted by the model. It's a more robust metric compared to MSE as it doesn't exaggerate the effect of large errors.
-
-The formula for MAE is:
-
-$$
-MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y_i}|
-$$
 """
-st.markdown(latext2)
 
+# Where:
+# - $y_i$ are the observed values,
+# - $\hat{y_i}$ are the predicted values.
+
+# ### Root Mean Squared Error (RMSE)
+
+# RMSE is the square root of MSE. It brings the unit back to the original scale of the target variable, making it easier to interpret.
+
+# The formula for RMSE is:
+
+# $$
+# RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y_i})^2}
+# $$
+
+# ### Mean Absolute Error (MAE)
+
+# MAE is the average of the absolute differences between the observed actual outcomes and the outcomes predicted by the model. It's a more robust metric compared to MSE as it doesn't exaggerate the effect of large errors.
+
+# The formula for MAE is:
+
+# $$
+# MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y_i}|
+# $$
+# """
+st.markdown(latext2)
