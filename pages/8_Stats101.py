@@ -154,7 +154,7 @@ st.write(f"Sum of squared errors (line of best fit): {SSE_best:.4f}")
 st.write(f"Sum of squared errors (picked line): {SSE_pick:.4f}")
 st.write(df)
 
-st.markdown("""
+st.markdown(f"""
 ### Mean Squared Error (MSE)
 
 Mean Squared Error is the average of the squared differences between the observed actual outcomes and the outcomes predicted by the model. It's useful because it gives a larger penalty to larger errors.
@@ -165,9 +165,10 @@ $$
 MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y_i})^2
 $$
 
+
 Where:
-- \( y_i \) are the observed values,
-- \( \hat{y_i} \) are the predicted values.
+- $y_i$ are the observed values,
+- $\hat{y_i}$ are the predicted values.
 
 ### Root Mean Squared Error (RMSE)
 
