@@ -96,8 +96,8 @@ st.plotly_chart(plot_r2_data(x3, y3, r2_0))
 #%% Experiment
 st.title("Experiment with your own line of best fit")
 
-coeff_pick = st.slider("Pick coefficient",-10,10,2)
-int_pick = st.slider("Pick intercept",-10,10,1)
+coeff_pick = st.slider("Pick coefficient",-10.0,10.0,2.0,step=0.5)
+int_pick = st.slider("Pick intercept",-10.0,10.0,1.0,step=0.5)
 
 # Dataset with R^2 = 0.8
 x = np.random.rand(100) * 10
@@ -126,6 +126,11 @@ rmse_pick = np.sqrt(mse_pick)
 
 coef = model.coef_[0]
 y_int = model.intercept_
+
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("R-Squared - best", f"{r2:.4f}")
+col1.metric("R-Squared - pick", f"{r2_pick:.4f}")
+
 title = f"R-squared = {r2:.4f}; MAE = {mae:.4f}; MSE = {mse:.4f}; RMSE = {rmse:.4f} <br><sup>Equation: y = {coef:.4f} * x + {y_int:.4f}</sup>"
 
 fig.update_layout(title=title, xaxis_title='X', yaxis_title='Y')
