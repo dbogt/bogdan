@@ -244,15 +244,15 @@ using the logistic (sigmoid) function.
 
 The model predicts the probability as follows:
 
-\[
+$$
 P(y=1 | x) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \dots + \beta_n x_n)}}
-\]
+$$
 
 Where:
-- \( \beta_0 \) is the intercept (bias term),
-- \( \beta_1, \dots, \beta_n \) are the coefficients for the features \( x_1, \dots, x_n \),
-- \( z = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n \) is the linear combination of input features,
-- \( \sigma(z) = \frac{1}{1 + e^{-z}} \) is the sigmoid function.
+- $ \beta_0 $ is the intercept (bias term),
+- $ \beta_1, \dots, \beta_n $ are the coefficients for the features \( x_1, \dots, x_n \),
+- $ z = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n $ is the linear combination of input features,
+- $ \sigma(z) = \frac{1}{1 + e^{-z}} $ is the sigmoid function.
 
 The output of the sigmoid function is a probability between 0 and 1, which can be interpreted as the likelihood that the input belongs to the positive class (1).
 
