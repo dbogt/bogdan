@@ -278,7 +278,7 @@ passFail = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1,
 examDF = pd.DataFrame({'Hours':hours, 'Outcome':passFail})
 st.write(examDF)                      
 clf = LogisticRegression()
-clf.fit(df[['Hours']],df['Outcome'])
+clf.fit(examDF[['Hours']],examDF['Outcome'])
 model_int = clf.intercept_
 model_coef = clf.coef_
 st.write(f"Model Intercept: {model_int}, Model Coefficient: {model_coef}")
