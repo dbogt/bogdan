@@ -275,7 +275,7 @@ st.plotly_chart(fig)
 #%% Sample Data
 hours = [1.1, 1.5, 1.9, 2.5, 2.5, 2.5, 2.7, 2.7, 3.2, 3.3, 3.5, 3.8, 4.5, 4.5, 4.8, 5.1, 5.5, 5.9, 6.1, 6.9, 7.4, 7.7, 7.8, 8.3, 8.5, 8.9, 9.2]
 passFail = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-examDF = pd.DataFrame({'Hours':hours, 'Outcome':outcome})
+examDF = pd.DataFrame({'Hours':hours, 'Outcome':passFail})
 st.write(examDF)                      
 clf = LogisticRegression()
 clf.fit(df[['Hours']],df['Outcome'])
