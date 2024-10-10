@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import streamlit as st
 
@@ -270,7 +271,18 @@ fig.update_layout(title="Sigmoid Function for Logistic Regression",
                   yaxis_title="σ(z) = 1 / (1 + exp(-z))")
 
 st.plotly_chart(fig)
-st.write("test")
+
+#%% Sample Data
+hours = [1.1, 1.5, 1.9, 2.5, 2.5, 2.5, 2.7, 2.7, 3.2, 3.3, 3.5, 3.8, 4.5, 4.5, 4.8, 5.1, 5.5, 5.9, 6.1, 6.9, 7.4, 7.7, 7.8, 8.3, 8.5, 8.9, 9.2]
+passFail = [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+examDF = pd.DataFrame({'Hours':hours, 'Outcome':outcome})
+st.write(examDF)                      
+clf = LogisticRegression()
+clf.fit(df[['Hours']],df['Outcome'])
+model_int = clf.intercept_
+model_coef = clf.coef_
+st.write(f"Model Intercept: {model_int}, Model Coefficient: {model_coef}")
+
 st.sidebar.title("Sections")
 linksViews = """
 - [**R-Squared**](#understanding-r-squared)
