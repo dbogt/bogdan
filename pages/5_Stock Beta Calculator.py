@@ -105,6 +105,27 @@ def convert_to_unix(date):
     return int(mktime(datum.timetuple())) + 86400 #adding 1 day due to timezone issue
 
 
+# @st.cache
+def fnYFinJSON(stock, field):
+    if not stock:
+        return "enter a ticker"
+    else:
+    	urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+stock
+    	webUrl = urlopen(urlData)
+    	if (webUrl.getcode() == 200):
+    		data = webUrl.read()
+    	else:
+    	    print ("Received an error from server, cannot retrieve results " + str(webUrl.getcode()))
+    	yFinJSON = json.loads(data)
+        
+    try:
+        tickerData = yFinJSON["quoteResponse"]["result"][0]
+    except:
+        return "N/A"
+    if field in tickerData:
+        return tickerData[field]
+    else:
+        return "N/A"
 
 #%% Refresh Pricing Functions    
 #@st.cache
