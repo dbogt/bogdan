@@ -270,7 +270,7 @@ fig.update_layout(title="Sigmoid Function for Logistic Regression",
                   yaxis_title="σ(z) = 1 / (1 + exp(-z))")
 
 st.plotly_chart(fig)
-
+st.write("test")
 st.sidebar.title("Sections")
 linksViews = """
 - [**R-Squared**](#understanding-r-squared)
