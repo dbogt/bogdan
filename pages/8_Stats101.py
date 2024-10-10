@@ -271,6 +271,16 @@ fig.update_layout(title="Sigmoid Function for Logistic Regression",
 
 st.plotly_chart(fig)
 
+st.sidebar.title("Sections")
+linksViews = """
+- [**R-Squared**](#understanding-r-squared)
+    - [**What is R-squared**](#what-is-r-squared)
+- [**Experiment Line of Best Fit**](#experiment-with-your-own-line-of-best-fit)
+    - [**Mean Squared Error (MSE)**](#mean-squared-error-mse)
+    - [**Root Mean Squared Error (RMSE)**](#root-mean-squared-error-rmse)
+    - [**Mean Absolute Error (MAE)**](#mean-absolute-error-mae)
+- [**Logistic Regression**](#understanding-logistic-regression)"""
 
+st.sidebar.write(linksViews)
 
 
