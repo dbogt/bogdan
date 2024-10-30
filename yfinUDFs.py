@@ -31,8 +31,10 @@ params = {
 
 url = "https://query1.finance.yahoo.com/v1/test/getcrumb"
 response = requests.get(url, params=params, cookies=cookies, headers=headers)
-newCrumb = response.text
-st.write(newCrumb)
+crumb = response.text
+# st.write(newCrumb)
+params['crumb'] = crumb
+
 
 def fnYFinJSON(stock, field):
     df = fnYFinJSONAll(stock)
@@ -96,8 +98,8 @@ def grabExpDates(ticker):
     e.g.: https://query2.finance.yahoo.com/v7/finance/options/SPY
     
     """
-    #url = "https://query1.finance.yahoo.com/v7/finance/options/AAPL?crumb=" + crumb
-    url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
+    url = "https://query1.finance.yahoo.com/v7/finance/options/"+ticker+"?crumb=" + crumb
+    #url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
     #data = pd.read_json(url)
     
     response = requests.get(url, params=params, cookies=cookies, headers=headers)
