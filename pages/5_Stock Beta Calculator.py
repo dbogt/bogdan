@@ -21,7 +21,8 @@ from io import StringIO, BytesIO
 from urllib.request import Request, urlopen  
 import json
 import yfinance as yf
-import yfinUDFs as bogYF
+# import yfinUDFs as bogYF
+import yfNEW as bogYF
 import plotly.figure_factory as ff #normal distribution curve
 
 #%% Yahoo Finance Cookies
