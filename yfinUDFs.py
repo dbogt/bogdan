@@ -29,11 +29,11 @@ params = {
     'corsDomain': 'finance.yahoo.com',
 }
 
-url = "https://query1.finance.yahoo.com/v1/test/getcrumb"
-response = requests.get(url, params=params, cookies=cookies, headers=headers)
-crumb = response.text
+#url = "https://query1.finance.yahoo.com/v1/test/getcrumb"
+#response = requests.get(url, params=params, cookies=cookies, headers=headers)
+#crumb = response.text
 # st.write(newCrumb)
-params['crumb'] = crumb
+#params['crumb'] = crumb
 
 
 def fnYFinJSON(stock, field):
