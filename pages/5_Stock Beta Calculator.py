@@ -234,7 +234,7 @@ stockName = grabPricing(stockDrop, 'displayName')
 if stockName == 'N/A':
     stockName = grabPricing(stockDrop, 'shortName')
 
-stockAllInfo = bogYF.fnYFinJSONAll(ticker)
+stockAllInfo = bogYF.fnYFinJSONAll(stockDrop)
 st.write("DEBUG")
 st.write(stockAllInfo)
 indexName = grabPricing(indexTicker , 'shortName')
