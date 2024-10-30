@@ -5,6 +5,7 @@ import requests
 import streamlit as st
 
 cookies = st.secrets['cookies']
+crumb = st.secrets['crumb']
 
 headers = {
     'authority': 'query2.finance.yahoo.com',
@@ -22,7 +23,7 @@ headers = {
 }
 
 params = {
-    'crumb': st.secrets['crumb'],
+    'crumb': crumb,
     'lang': 'en-US',
     'region': 'US',
     'corsDomain': 'finance.yahoo.com',
@@ -90,11 +91,13 @@ def grabExpDates(ticker):
     e.g.: https://query2.finance.yahoo.com/v7/finance/options/SPY
     
     """
-    url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
+    url = "https://query1.finance.yahoo.com/v7/finance/options/AAPL?crumb=" + crumb
+    #url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
     #data = pd.read_json(url)
     
     response = requests.get(url, params=params, cookies=cookies, headers=headers)
     data = response.json()
+    st.write(data)
 
     expDatesUnix = data['optionChain']['result'][0]['expirationDates']
     expDatesNormal = pd.to_datetime(expDatesUnix, origin="unix",unit='s')
