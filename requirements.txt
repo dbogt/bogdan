@@ -12,3 +12,4 @@ openpyxl
 streamlit==1.14.0
 yfinance==0.2.20
 scikit-learn
+altair==4.0
