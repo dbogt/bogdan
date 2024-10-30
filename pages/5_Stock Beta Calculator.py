@@ -233,7 +233,10 @@ indexDF.index = indexDF.index.date
 stockName = grabPricing(stockDrop, 'displayName')
 if stockName == 'N/A':
     stockName = grabPricing(stockDrop, 'shortName')
-    
+
+stockAllInfo = bogYF.fnYFinJSONAll(ticker)
+st.write("DEBUG")
+st.write(stockAllInfo)
 indexName = grabPricing(indexTicker , 'shortName')
 stockPrice = grabPricing(stockDrop, 'regularMarketPrice')
 indexPrice = grabPricing(indexTicker, 'regularMarketPrice')
