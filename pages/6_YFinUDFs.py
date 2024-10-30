@@ -24,7 +24,6 @@ headers = {
 }
 
 params = {
-    'crumb': 'aQXXlwvY/Hw',
     'lang': 'en-US',
     'region': 'US',
     'corsDomain': 'finance.yahoo.com',
@@ -59,6 +58,7 @@ st.write("https://query1.finance.yahoo.com/v1/test/getcrumb")
 crumb = st.text_input("enter your crumb")
 urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
 st.write(urlData + "&crumb=" + crumb)
+params['crumb'] = crumb
 response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
 data = response.json()
 st.write(data)
