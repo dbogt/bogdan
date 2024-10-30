@@ -9,6 +9,6 @@ xlrd==1.2.0
 beautifulsoup4
 urllib3==1.26.6
 openpyxl
-streamlit==1.14.0
+streamlit
 yfinance==0.2.48
 scikit-learn
