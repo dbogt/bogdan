@@ -29,6 +29,11 @@ params = {
     'corsDomain': 'finance.yahoo.com',
 }
 
+url = "https://query1.finance.yahoo.com/v1/test/getcrumb"
+response = requests.get(url, params=params, cookies=cookies, headers=headers)
+newCrumb = response.text
+st.write(newCrumb)
+
 def fnYFinJSON(stock, field):
     df = fnYFinJSONAll(stock)
     if field in df.columns:
@@ -91,13 +96,13 @@ def grabExpDates(ticker):
     e.g.: https://query2.finance.yahoo.com/v7/finance/options/SPY
     
     """
-    url = "https://query1.finance.yahoo.com/v7/finance/options/AAPL?crumb=" + crumb
-    #url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
+    #url = "https://query1.finance.yahoo.com/v7/finance/options/AAPL?crumb=" + crumb
+    url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
     #data = pd.read_json(url)
     
     response = requests.get(url, params=params, cookies=cookies, headers=headers)
     data = response.json()
-    st.write(data)
+    #st.write(data)
 
     expDatesUnix = data['optionChain']['result'][0]['expirationDates']
     expDatesNormal = pd.to_datetime(expDatesUnix, origin="unix",unit='s')
