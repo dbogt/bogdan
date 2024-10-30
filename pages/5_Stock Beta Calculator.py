@@ -31,11 +31,11 @@ import plotly.figure_factory as ff #normal distribution curve
 st.set_page_config(layout="wide",page_title='Stock Beta App')
 
 #%% Import Files
-@st.cache
-def grabDF(fileName):
-    df = pd.read_csv("StockData/" + fileName, parse_dates=['Date'],index_col=['Date'])
-    df['Returns'] = df['Close'].pct_change()
-    return df
+# @st.cache
+# def grabDF(fileName):
+#     df = pd.read_csv("StockData/" + fileName, parse_dates=['Date'],index_col=['Date'])
+#     df['Returns'] = df['Close'].pct_change()
+#     return df
 
 
 def displ_pdf(pdf_file):
@@ -52,16 +52,24 @@ def displ_pdf_link(pdf_file):
     st.markdown(pdf_display, unsafe_allow_html=True)
 
 #%% Functions for timestamps    
-@st.cache(allow_output_mutation=True)
-def currentTime():
-    return []
+# @st.cache(allow_output_mutation=True)
+# def currentTime():
+#     return []
 
-def updateDate():
-    if len(currentTime())>0:
-        currentTime().pop(0)
-        currentTime().append(datetime.now())
-    else:
-        currentTime().append(datetime.now())
+@st.cache_data
+def currentTime():
+    return datetime.now()
+
+def utc_to_time(naive, timezone='Canada/Eastern'):
+    return naive.replace(tzinfo=pytz.utc).astimezone(pytz.timezone(timezone))
+
+
+# def updateDate():
+#     if len(currentTime())>0:
+#         currentTime().pop(0)
+#         currentTime().append(datetime.now())
+#     else:
+#         currentTime().append(datetime.now())
 
 
 #%% Yahoo Finance Functions
@@ -129,12 +137,15 @@ def fnYFinJSON(stock, field):
 
 #%% Refresh Pricing Functions    
 #@st.cache
+@st.cache_data
 def grabPricing(ticker, field):
     fieldValue = bogYF.fnYFinJSON(ticker, field)
-    updateDate()
+    # updateDate()
+    currentTime()
     return fieldValue
 
 #@st.cache
+@st.cache_data
 def grabPricingAll(ticker, interval="1d", period_start="2013-01-01", period_end="2023-01-19"):
     #df = fnYFinHist(ticker, interval, start, end)
     df = yf.download(ticker, interval=interval, start=period_start, end=period_end)
@@ -144,16 +155,19 @@ def grabPricingAll(ticker, interval="1d", period_start="2013-01-01", period_end=
     df['Date'] = df['Date'].dt.normalize()
     df.set_index('Date', inplace=True)
     #st.write(data)
-    updateDate()
+    # updateDate()
+    currentTime()
     return df
 
 
-@st.cache(allow_output_mutation=True)
+#@st.cache(allow_output_mutation=True)
+@st.cache_data
 def refreshPricing(ticker, timeStamp):  
     newPrice = fnYFinJSON(ticker, 'regularMarketPrice')
     return newPrice
 
-@st.cache(allow_output_mutation=True)
+#@st.cache(allow_output_mutation=True)
+@st.cache_data
 def refreshPricingAll(ticker, interval, start, end, timeStamp):  
     #df = fnYFinHist(ticker, interval, start, end)
     df = yf.download(ticker, interval=interval, start=start, end=end)
@@ -232,15 +246,19 @@ currencyMap = {'GBp':'GBp','USD':'US$','CAD':'C$','JPY':'¥','AUD':'A$', 'EUR':'
 currency = currencyMap[stockCurrency]
 
 if st.sidebar.button("Refresh Pricing"):
-    updateDate()
-    indexPrice = refreshPricing(indexTicker, currentTime()[0])
-    stockPrice = refreshPricing(stockDrop, currentTime()[0])
-    stockDF = refreshPricingAll(stockDrop, interval, dayStart, dayEnd, currentTime()[0])
-    indexDF = refreshPricingAll(indexTicker, interval, dayStart, dayEnd, currentTime()[0])
-    updateDate()
-    st.sidebar.write("Last price update: {}".format(currentTime()[0]))
+    # updateDate()
+    st.cache_data.clear()
+    lastTime = currentTime()
+    indexPrice = refreshPricing(indexTicker, lastTime)
+    stockPrice = refreshPricing(stockDrop, lastTime)
+    stockDF = refreshPricingAll(stockDrop, interval, dayStart, dayEnd, lastTime)
+    indexDF = refreshPricingAll(indexTicker, interval, dayStart, dayEnd, lastTime)
+    # updateDate()
+    st.sidebar.write("Last price update: {}".format(lastTime))
 else:
-    st.sidebar.write("Last price update: {}".format(currentTime()[0]))
+    lastTime = currentTime()
+    #st.sidebar.write("Last price update: {}".format(lastTime)
+    st.sidebar.write("Last price update: {} EST".format(utc_to_time(lastTime)))
 
 #%% Merging Data Sets
 mergedData = indexDF.merge(stockDF, how='inner',
