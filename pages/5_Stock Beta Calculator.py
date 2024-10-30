@@ -167,11 +167,30 @@ def fnYFinJSON(stock, field):
 #%% Refresh Pricing Functions    
 #@st.cache
 @st.cache_data
+def grabTicker(ticker):
+    urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
+    params['crumb'] = st.secrets['crumb']
+    response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
+    data = response.json()
+    df2 = pd.DataFrame(data['quoteResponse']['result'])
+    df2.set_index('symbol',inplace=True)
+    return df2
+    
+
+
+@st.cache_data
 def grabPricing(ticker, field):
-    fieldValue = bogYF.fnYFinJSON(ticker, field)
+    #st.write("DEBUG")
+    df = grabTicker(ticker)
+    if field in df.columns:
+        return df.iloc[0][field]
+    else:
+        return "N/A"    
+    
+    #fieldValue = bogYF.fnYFinJSON(ticker, field)
     # updateDate()
-    currentTime()
-    return fieldValue
+    #currentTime()
+    #return fieldValue
 
 #@st.cache
 @st.cache_data
@@ -264,16 +283,11 @@ if stockName == 'N/A':
 
 # stockAllInfo = yf.Ticker(stockDrop)
 
-st.write("DEBUG")
-urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+stockDrop
-params['crumb'] = st.secrets['crumb']
-response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
-data = response.json()
-st.write(data)
 
 
 
-st.write(stockAllInfo.fast_info)
+
+#st.write(stockAllInfo.fast_info)
 indexName = grabPricing(indexTicker , 'shortName')
 stockPrice = grabPricing(stockDrop, 'regularMarketPrice')
 indexPrice = grabPricing(indexTicker, 'regularMarketPrice')
