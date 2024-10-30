@@ -21,8 +21,7 @@ from io import StringIO, BytesIO
 from urllib.request import Request, urlopen  
 import json
 import yfinance as yf
-# import yfinUDFs as bogYF
-import yfNEW as bogYF
+import yfinUDFs as bogYF
 import plotly.figure_factory as ff #normal distribution curve
 
 #%% Yahoo Finance Cookies
@@ -31,40 +30,12 @@ import plotly.figure_factory as ff #normal distribution curve
 
 st.set_page_config(layout="wide",page_title='Stock Beta App')
 
-#%% Yahoo Finance Codes
-cookies = st.secrets['cookies']
-#st.write(cookies)
-
-headers = {
-    'authority': 'query2.finance.yahoo.com',
-    'accept': '*/*',
-    'accept-language': 'en-US,en;q=0.9',
-    # 'cookie': 'B=2hc15i1h3p44f&b=3&s=dj; A1=d=AQABBI-QPGICEPhghfRgPzYi2nCIbpAlsCgFEgEBCAGoNWRlZCUHb2UB_eMBAAcIj5A8YpAlsCg&S=AQAAAuZpWil7Nsv74jTOjnvSnng; A3=d=AQABBI-QPGICEPhghfRgPzYi2nCIbpAlsCgFEgEBCAGoNWRlZCUHb2UB_eMBAAcIj5A8YpAlsCg&S=AQAAAuZpWil7Nsv74jTOjnvSnng; GUC=AQEBCAFkNahkZUIatwPX; A1S=d=AQABBI-QPGICEPhghfRgPzYi2nCIbpAlsCgFEgEBCAGoNWRlZCUHb2UB_eMBAAcIj5A8YpAlsCg&S=AQAAAuZpWil7Nsv74jTOjnvSnng&j=WORLD; cmp=t=1681950149&j=0&u=1---; PRF=t%3DAAPL%252B%255EGSPC%252B%255EGSPTSE%252BCAD%253DX%252BTSLA%252BCBA.AX%252BDDS%252BBHP.AX%252BENEL.MI%252BAMZN%252BNFLX%252B%255EIXIC%252BCGX.TO%252BES%253DF%252BACN%26newChartbetateaser%3D1',
-    'origin': 'https://finance.yahoo.com',
-    'referer': 'https://finance.yahoo.com/quote/AAPL?p=AAPL&.tsrc=fin-srch',
-    'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Windows"',
-    'sec-fetch-dest': 'empty',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-site': 'same-site',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36',
-}
-
-params = {
-    'lang': 'en-US',
-    'region': 'US',
-    'corsDomain': 'finance.yahoo.com',
-}
-
-
-
 #%% Import Files
-# @st.cache
-# def grabDF(fileName):
-#     df = pd.read_csv("StockData/" + fileName, parse_dates=['Date'],index_col=['Date'])
-#     df['Returns'] = df['Close'].pct_change()
-#     return df
+@st.cache
+def grabDF(fileName):
+    df = pd.read_csv("StockData/" + fileName, parse_dates=['Date'],index_col=['Date'])
+    df['Returns'] = df['Close'].pct_change()
+    return df
 
 
 def displ_pdf(pdf_file):
@@ -81,24 +52,16 @@ def displ_pdf_link(pdf_file):
     st.markdown(pdf_display, unsafe_allow_html=True)
 
 #%% Functions for timestamps    
-# @st.cache(allow_output_mutation=True)
-# def currentTime():
-#     return []
-
-@st.cache_data
+@st.cache(allow_output_mutation=True)
 def currentTime():
-    return datetime.now()
+    return []
 
-def utc_to_time(naive, timezone='Canada/Eastern'):
-    return naive.replace(tzinfo=pytz.utc).astimezone(pytz.timezone(timezone))
-
-
-# def updateDate():
-#     if len(currentTime())>0:
-#         currentTime().pop(0)
-#         currentTime().append(datetime.now())
-#     else:
-#         currentTime().append(datetime.now())
+def updateDate():
+    if len(currentTime())>0:
+        currentTime().pop(0)
+        currentTime().append(datetime.now())
+    else:
+        currentTime().append(datetime.now())
 
 
 #%% Yahoo Finance Functions
@@ -142,58 +105,15 @@ def convert_to_unix(date):
     return int(mktime(datum.timetuple())) + 86400 #adding 1 day due to timezone issue
 
 
-# @st.cache
-def fnYFinJSON(stock, field):
-    if not stock:
-        return "enter a ticker"
-    else:
-    	urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+stock
-    	webUrl = urlopen(urlData)
-    	if (webUrl.getcode() == 200):
-    		data = webUrl.read()
-    	else:
-    	    print ("Received an error from server, cannot retrieve results " + str(webUrl.getcode()))
-    	yFinJSON = json.loads(data)
-        
-    try:
-        tickerData = yFinJSON["quoteResponse"]["result"][0]
-    except:
-        return "N/A"
-    if field in tickerData:
-        return tickerData[field]
-    else:
-        return "N/A"
 
 #%% Refresh Pricing Functions    
 #@st.cache
-@st.cache_data
-def grabTicker(ticker):
-    urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
-    params['crumb'] = st.secrets['crumb']
-    response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
-    data = response.json()
-    df2 = pd.DataFrame(data['quoteResponse']['result'])
-    df2.set_index('symbol',inplace=True)
-    return df2
-    
-
-
-@st.cache_data
 def grabPricing(ticker, field):
-    #st.write("DEBUG")
-    df = grabTicker(ticker)
-    if field in df.columns:
-        return df.iloc[0][field]
-    else:
-        return "N/A"    
-    
-    #fieldValue = bogYF.fnYFinJSON(ticker, field)
-    # updateDate()
-    #currentTime()
-    #return fieldValue
+    fieldValue = bogYF.fnYFinJSON(ticker, field)
+    updateDate()
+    return fieldValue
 
 #@st.cache
-@st.cache_data
 def grabPricingAll(ticker, interval="1d", period_start="2013-01-01", period_end="2023-01-19"):
     #df = fnYFinHist(ticker, interval, start, end)
     df = yf.download(ticker, interval=interval, start=period_start, end=period_end)
@@ -203,19 +123,16 @@ def grabPricingAll(ticker, interval="1d", period_start="2013-01-01", period_end=
     df['Date'] = df['Date'].dt.normalize()
     df.set_index('Date', inplace=True)
     #st.write(data)
-    # updateDate()
-    currentTime()
+    updateDate()
     return df
 
 
-#@st.cache(allow_output_mutation=True)
-@st.cache_data
+@st.cache(allow_output_mutation=True)
 def refreshPricing(ticker, timeStamp):  
     newPrice = fnYFinJSON(ticker, 'regularMarketPrice')
     return newPrice
 
-#@st.cache(allow_output_mutation=True)
-@st.cache_data
+@st.cache(allow_output_mutation=True)
 def refreshPricingAll(ticker, interval, start, end, timeStamp):  
     #df = fnYFinHist(ticker, interval, start, end)
     df = yf.download(ticker, interval=interval, start=start, end=end)
@@ -280,14 +197,7 @@ indexDF.index = indexDF.index.date
 stockName = grabPricing(stockDrop, 'displayName')
 if stockName == 'N/A':
     stockName = grabPricing(stockDrop, 'shortName')
-
-# stockAllInfo = yf.Ticker(stockDrop)
-
-
-
-
-
-#st.write(stockAllInfo.fast_info)
+    
 indexName = grabPricing(indexTicker , 'shortName')
 stockPrice = grabPricing(stockDrop, 'regularMarketPrice')
 indexPrice = grabPricing(indexTicker, 'regularMarketPrice')
@@ -301,19 +211,15 @@ currencyMap = {'GBp':'GBp','USD':'US$','CAD':'C$','JPY':'¥','AUD':'A$', 'EUR':'
 currency = currencyMap[stockCurrency]
 
 if st.sidebar.button("Refresh Pricing"):
-    # updateDate()
-    st.cache_data.clear()
-    lastTime = currentTime()
-    indexPrice = refreshPricing(indexTicker, lastTime)
-    stockPrice = refreshPricing(stockDrop, lastTime)
-    stockDF = refreshPricingAll(stockDrop, interval, dayStart, dayEnd, lastTime)
-    indexDF = refreshPricingAll(indexTicker, interval, dayStart, dayEnd, lastTime)
-    # updateDate()
-    st.sidebar.write("Last price update: {}".format(lastTime))
+    updateDate()
+    indexPrice = refreshPricing(indexTicker, currentTime()[0])
+    stockPrice = refreshPricing(stockDrop, currentTime()[0])
+    stockDF = refreshPricingAll(stockDrop, interval, dayStart, dayEnd, currentTime()[0])
+    indexDF = refreshPricingAll(indexTicker, interval, dayStart, dayEnd, currentTime()[0])
+    updateDate()
+    st.sidebar.write("Last price update: {}".format(currentTime()[0]))
 else:
-    lastTime = currentTime()
-    #st.sidebar.write("Last price update: {}".format(lastTime)
-    st.sidebar.write("Last price update: {} EST".format(utc_to_time(lastTime)))
+    st.sidebar.write("Last price update: {}".format(currentTime()[0]))
 
 #%% Merging Data Sets
 mergedData = indexDF.merge(stockDF, how='inner',
