@@ -115,7 +115,7 @@ def summary_stats(group):
     }, index=[group.name])
 
 stats = df.groupby("dataset").apply(summary_stats).reset_index(drop=True)
-print(stats)
+
 
 # Visualization using Plotly
 # Visualization using Plotly with subplots
@@ -157,6 +157,8 @@ fig_aq.update_layout(
     showlegend=False
 )
 st.plotly_chart(fig_aq)
+st.write(df)
+st.write(stats)
 
 
 #%% Experiment
