@@ -7,6 +7,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import streamlit as st
+import statsmodels.api as sm
 
 # Generating data for different R^2 values
 np.random.seed(42)
