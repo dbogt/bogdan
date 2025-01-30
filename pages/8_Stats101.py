@@ -156,9 +156,11 @@ fig_aq.update_layout(
     template="plotly_white",
     showlegend=False
 )
+st.write("The data in the 4 charts below all have the same variance, average, correlation, slope, and R2")
 st.plotly_chart(fig_aq)
-st.write(df)
 st.write(stats)
+st.write(df)
+
 
 
 #%% Experiment
