@@ -117,12 +117,14 @@ stats = df.groupby("dataset").apply(summary_stats).reset_index(drop=True)
 print(stats)
 
 # Visualization using Plotly
-fig_aq = go.Figure()
+# Visualization using Plotly with subplots
+fig_aq = make_subplots(rows=2, cols=2, subplot_titles=["Dataset I", "Dataset II", "Dataset III", "Dataset IV"])
 
 datasets = ["I", "II", "III", "IV"]
 colors = ["blue", "green", "orange", "red"]
+positions = [(1, 1), (1, 2), (2, 1), (2, 2)]
 
-for dataset, color in zip(datasets, colors):
+for (dataset, color, pos) in zip(datasets, colors, positions):
     subset = df[df["dataset"] == dataset]
     
     # Scatter plot
@@ -131,7 +133,7 @@ for dataset, color in zip(datasets, colors):
         mode='markers',
         name=f"Dataset {dataset}",
         marker=dict(color=color)
-    ))
+    ), row=pos[0], col=pos[1])
     
     # Fit linear regression
     model = sm.OLS(subset["y"], sm.add_constant(subset["x"])).fit()
@@ -144,13 +146,14 @@ for dataset, color in zip(datasets, colors):
         mode='lines',
         name=f"Regression Line {dataset}",
         line=dict(color=color, dash='dash')
-    ))
+    ), row=pos[0], col=pos[1])
 
 fig_aq.update_layout(
-    title="Anscombe's Quartet - Plotly Visualization",
+    title="Anscombe's Quartet - Plotly Subplots",
     xaxis_title="X",
     yaxis_title="Y",
-    template="plotly_white"
+    template="plotly_white",
+    showlegend=False
 )
 st.plotly_chart(fig_aq)
 
