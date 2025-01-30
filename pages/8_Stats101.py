@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.linear_model import LinearRegression
@@ -93,6 +94,25 @@ st.plotly_chart(plot_r2_data(x1, y1, r2_1))
 st.plotly_chart(plot_r2_data(x1_neg, y1_neg, r2_1))
 st.plotly_chart(plot_r2_data(x2, y2, r2_08))
 st.plotly_chart(plot_r2_data(x3, y3, r2_0))
+
+#%% Anscombie's Quartet
+st.title("Anscombie's Quartet")
+aq_df = sns.load_dataset("anscombe")
+# Summary statistics
+def summary_stats(group):
+    model = sm.OLS(group["y"], sm.add_constant(group["x"])).fit()
+    return pd.DataFrame({
+        "X Mean": group["x"].mean(),
+        "Y Mean": group["y"].mean(),
+        "X Variance": group["x"].var(),
+        "Y Variance": group["y"].var(),
+        "Correlation": group["x"].corr(group["y"]),
+        "Regression Slope": model.params[1],
+        "R-squared": model.rsquared
+    }, index=[group.name])
+
+stats = aq_df.groupby("dataset").apply(summary_stats).reset_index(drop=True)
+st.write(stats)
 
 #%% Experiment
 st.title("Experiment with your own line of best fit")
