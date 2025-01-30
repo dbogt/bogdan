@@ -96,8 +96,8 @@ st.plotly_chart(plot_r2_data(x1_neg, y1_neg, r2_1))
 st.plotly_chart(plot_r2_data(x2, y2, r2_08))
 st.plotly_chart(plot_r2_data(x3, y3, r2_0))
 
-#%% Anscombie's Quartet
-st.title("Anscombie's Quartet")
+#%% Anscombe's Quartet
+st.title("Anscombe's Quartet")
 # Load Anscombe's quartet
 df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/anscombe.csv")
 
@@ -356,7 +356,7 @@ st.sidebar.title("Sections")
 linksViews = """
 - [**R-Squared**](#understanding-r-squared)
     - [**What is R-squared**](#what-is-r-squared)
-    - [**Anscombe's Quartet**](#anscombie-s-quartet)
+    - [**Anscombe's Quartet**](#anscombe-s-quartet)
 - [**Experiment Line of Best Fit**](#experiment-with-your-own-line-of-best-fit)
     - [**Mean Squared Error (MSE)**](#mean-squared-error-mse)
     - [**Root Mean Squared Error (RMSE)**](#root-mean-squared-error-rmse)
