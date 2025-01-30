@@ -97,7 +97,9 @@ st.plotly_chart(plot_r2_data(x3, y3, r2_0))
 
 #%% Anscombie's Quartet
 st.title("Anscombie's Quartet")
-aq_df = sns.load_dataset("anscombe")
+# Load Anscombe's quartet
+df = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/anscombe.csv")
+
 # Summary statistics
 def summary_stats(group):
     model = sm.OLS(group["y"], sm.add_constant(group["x"])).fit()
@@ -111,8 +113,47 @@ def summary_stats(group):
         "R-squared": model.rsquared
     }, index=[group.name])
 
-stats = aq_df.groupby("dataset").apply(summary_stats).reset_index(drop=True)
-st.write(stats)
+stats = df.groupby("dataset").apply(summary_stats).reset_index(drop=True)
+print(stats)
+
+# Visualization using Plotly
+fig_aq = go.Figure()
+
+datasets = ["I", "II", "III", "IV"]
+colors = ["blue", "green", "orange", "red"]
+
+for dataset, color in zip(datasets, colors):
+    subset = df[df["dataset"] == dataset]
+    
+    # Scatter plot
+    fig_aq.add_trace(go.Scatter(
+        x=subset["x"], y=subset["y"],
+        mode='markers',
+        name=f"Dataset {dataset}",
+        marker=dict(color=color)
+    ))
+    
+    # Fit linear regression
+    model = sm.OLS(subset["y"], sm.add_constant(subset["x"])).fit()
+    x_vals = np.linspace(subset["x"].min(), subset["x"].max(), 100)
+    y_vals = model.predict(sm.add_constant(x_vals))
+    
+    # Regression line
+    fig_aq.add_trace(go.Scatter(
+        x=x_vals, y=y_vals,
+        mode='lines',
+        name=f"Regression Line {dataset}",
+        line=dict(color=color, dash='dash')
+    ))
+
+fig_aq.update_layout(
+    title="Anscombe's Quartet - Plotly Visualization",
+    xaxis_title="X",
+    yaxis_title="Y",
+    template="plotly_white"
+)
+st.plotly_chart(fig_aq)
+
 
 #%% Experiment
 st.title("Experiment with your own line of best fit")
