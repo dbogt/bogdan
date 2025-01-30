@@ -356,6 +356,7 @@ st.sidebar.title("Sections")
 linksViews = """
 - [**R-Squared**](#understanding-r-squared)
     - [**What is R-squared**](#what-is-r-squared)
+    - [**Anscombe's Quartet**](#anscombie-s-quartet)
 - [**Experiment Line of Best Fit**](#experiment-with-your-own-line-of-best-fit)
     - [**Mean Squared Error (MSE)**](#mean-squared-error-mse)
     - [**Root Mean Squared Error (RMSE)**](#root-mean-squared-error-rmse)
