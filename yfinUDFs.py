@@ -110,7 +110,7 @@ def optionChain(ticker='SPY', date='2022-11-18', calls_puts = 'calls'):
     url = url.format(ticker, int(unixTS))
 
     # response = requests.get(url, params=params, cookies=cookies, headers=headers)
-    response = requests.get(urlData, params=params, cookies=dict(cookies), impersonate="chrome")
+    response = requests.get(url, params=params, cookies=dict(cookies), impersonate="chrome")
     data = response.json()
     
     #data = pd.read_json(url)
