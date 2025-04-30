@@ -77,7 +77,7 @@ def grabExpDates(ticker):
     #data = pd.read_json(url)
     
     # response = requests.get(url, params=params, cookies=cookies, headers=headers)
-    response = requests.get(urlData, params=params, cookies=dict(cookies), impersonate="chrome")
+    response = requests.get(url, params=params, cookies=dict(cookies), impersonate="chrome")
     data = response.json()
     #st.write(data)
 
