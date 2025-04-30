@@ -11,7 +11,6 @@ headers = {
     'authority': 'query2.finance.yahoo.com',
     'accept': '*/*',
     'accept-language': 'en-US,en;q=0.9',
-    # 'cookie': 'B=2hc15i1h3p44f&b=3&s=dj; A1=d=AQABBI-QPGICEPhghfRgPzYi2nCIbpAlsCgFEgEBCAGoNWRlZCUHb2UB_eMBAAcIj5A8YpAlsCg&S=AQAAAuZpWil7Nsv74jTOjnvSnng; A3=d=AQABBI-QPGICEPhghfRgPzYi2nCIbpAlsCgFEgEBCAGoNWRlZCUHb2UB_eMBAAcIj5A8YpAlsCg&S=AQAAAuZpWil7Nsv74jTOjnvSnng; GUC=AQEBCAFkNahkZUIatwPX; A1S=d=AQABBI-QPGICEPhghfRgPzYi2nCIbpAlsCgFEgEBCAGoNWRlZCUHb2UB_eMBAAcIj5A8YpAlsCg&S=AQAAAuZpWil7Nsv74jTOjnvSnng&j=WORLD; cmp=t=1681950149&j=0&u=1---; PRF=t%3DAAPL%252B%255EGSPC%252B%255EGSPTSE%252BCAD%253DX%252BTSLA%252BCBA.AX%252BDDS%252BBHP.AX%252BENEL.MI%252BAMZN%252BNFLX%252B%255EIXIC%252BCGX.TO%252BES%253DF%252BACN%26newChartbetateaser%3D1',
     'origin': 'https://finance.yahoo.com',
     'referer': 'https://finance.yahoo.com/quote/AAPL?p=AAPL&.tsrc=fin-srch',
     'sec-ch-ua': '"Chromium";v="112", "Google Chrome";v="112", "Not:A-Brand";v="99"',
@@ -56,6 +55,8 @@ def fnYFinJSONAll(stock):
 ticker = st.text_input("Enter a ticker")
 st.write("https://query1.finance.yahoo.com/v1/test/getcrumb")
 crumb = st.text_input("enter your crumb")
+crumbDynamic = requests.get('https://query1.finance.yahoo.com/v1/test/getcrumb', params=params, cookies=cookies, headers=headers)
+st.write(crumbDynamic.text)
 urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
 st.write(urlData + "&crumb=" + crumb)
 params['crumb'] = st.secrets['crumb']
