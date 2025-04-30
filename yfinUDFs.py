@@ -1,9 +1,9 @@
 from urllib.request import Request, urlopen  
 import pandas as pd
 import json
-import requests
+#import requests
 import streamlit as st
-
+from curl_cffi import requests
 cookies = st.secrets['cookies']
 crumb = st.secrets['crumb']
 
@@ -29,13 +29,6 @@ params = {
     'corsDomain': 'finance.yahoo.com',
 }
 
-#url = "https://query1.finance.yahoo.com/v1/test/getcrumb"
-#response = requests.get(url, params=params, cookies=cookies, headers=headers)
-#crumb = response.text
-# st.write(newCrumb)
-#params['crumb'] = crumb
-
-
 def fnYFinJSON(stock, field):
     df = fnYFinJSONAll(stock)
     if field in df.columns:
@@ -46,30 +39,11 @@ def fnYFinJSON(stock, field):
     
 
 
-def fnYFinJSONOLD(stock, field):
-    if not stock:
-        return "enter a ticker"
-    else:
-    	urlData = "https://query2.finance.yahoo.com/v6/finance/quote?symbols="+stock
-    	webUrl = urlopen(urlData)
-    	if (webUrl.getcode() == 200):
-    		data = webUrl.read()
-    	else:
-    	    print ("Received an error from server, cannot retrieve results " + str(webUrl.getcode()))
-    	yFinJSON = json.loads(data)
-        
-    try:
-        tickerData = yFinJSON["quoteResponse"]["result"][0]
-    except:
-        return "N/A"
-    if field in tickerData:
-        return tickerData[field]
-    else:
-        return "N/A"
 
 def fnYFinJSONAll(stock): 
     urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+stock 
-    response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
+    # response = requests.get(urlData, params=params, cookies=cookies, headers=headers)
+    response = requests.get(urlData, params=params, cookies=dict(cookies), impersonate="chrome")
     #st.write("Running", stock)
     try:
         data = response.json()
