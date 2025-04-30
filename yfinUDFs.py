@@ -76,7 +76,8 @@ def grabExpDates(ticker):
     #url = "https://query2.finance.yahoo.com/v7/finance/options/" + ticker
     #data = pd.read_json(url)
     
-    response = requests.get(url, params=params, cookies=cookies, headers=headers)
+    # response = requests.get(url, params=params, cookies=cookies, headers=headers)
+    response = requests.get(urlData, params=params, cookies=dict(cookies), impersonate="chrome")
     data = response.json()
     #st.write(data)
 
@@ -108,7 +109,8 @@ def optionChain(ticker='SPY', date='2022-11-18', calls_puts = 'calls'):
     unixTS = pd.Timestamp('{} 00:00:00'.format(date)).timestamp()
     url = url.format(ticker, int(unixTS))
 
-    response = requests.get(url, params=params, cookies=cookies, headers=headers)
+    # response = requests.get(url, params=params, cookies=cookies, headers=headers)
+    response = requests.get(urlData, params=params, cookies=dict(cookies), impersonate="chrome")
     data = response.json()
     
     #data = pd.read_json(url)
