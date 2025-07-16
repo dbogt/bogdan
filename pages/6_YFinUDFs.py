@@ -55,7 +55,7 @@ def fnYFinJSONAll(stock):
 ticker = st.text_input("Enter a ticker")
 st.write("https://query1.finance.yahoo.com/v1/test/getcrumb")
 crumb = st.text_input("enter your crumb")
-st.write(crumbDynamic.text)
+#st.write(crumbDynamic.text)
 urlData = "https://query2.finance.yahoo.com/v7/finance/quote?symbols="+ticker
 st.write(urlData + "&crumb=" + crumb)
 params['crumb'] = st.secrets['crumb']
