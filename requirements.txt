@@ -1,3 +1,4 @@
+streamlit
 pandas
 curl_cffi
 statsmodels
@@ -10,6 +11,5 @@ xlrd
 beautifulsoup4
 urllib3
 openpyxl
-streamlit
 yfinance
 scikit-learn
