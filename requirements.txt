@@ -13,4 +13,3 @@ openpyxl
 streamlit
 yfinance
 scikit-learn
-altair
